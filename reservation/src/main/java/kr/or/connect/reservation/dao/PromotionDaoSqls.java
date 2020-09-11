@@ -1,0 +1,15 @@
+package kr.or.connect.reservation.dao;
+
+public class PromotionDaoSqls {
+
+	public static final String SELECT_ALL =  
+			"SELECT PROMOTION.ID AS ID, " + 
+			"	 	 PROMOTION.PRODUCT_ID AS PRODUCTID, " + 
+			"	  	 FILE_INFO.SAVE_FILE_NAME AS PRODUCTIMAGEURL " + 
+			"FROM PROMOTION " + 
+			"JOIN PRODUCT ON PRODUCT.ID = PROMOTION.PRODUCT_ID " + 
+			"JOIN PRODUCT_IMAGE ON PRODUCT_IMAGE.PRODUCT_ID = PRODUCT.ID " + 
+			"JOIN FILE_INFO ON FILE_INFO.ID = PRODUCT_IMAGE.FILE_ID " + 
+			"WHERE PRODUCT_IMAGE.TYPE='TH'";
+
+}
