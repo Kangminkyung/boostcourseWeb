@@ -69,16 +69,16 @@ public class PageController {
 	public ModelAndView myreservationPage(ModelAndView model, HttpServletRequest request, HttpSession session) throws IOException {
 	
 		String reservationEmail = request.getParameter("reservationEmail");
-		
-		if(session.getAttribute("email") == null && myReservationService.getReservationCount(reservationEmail) > 0) {
+		System.out.println(("pageController /myreservation , reservationEmail = "+reservationEmail));
+/*		if(session.getAttribute("email") == null && myReservationService.getTotalReservationCountByEmail(reservationEmail) > 0) {
 			session.setAttribute("reservationEmail", reservationEmail);
-		}else if(myReservationService.getReservationCount(reservationEmail) == 0) {
+		}else if(myReservationService.getTotalReservationCountByEmail(reservationEmail) == 0) {
 			System.out.println("아이디가 존재하지 않습니다.");
 		}
 	
 		System.out.println("세션 확인: "+ session.getAttribute(reservationEmail));
 		System.out.println("pageController reservationEmail: " + reservationEmail);
-		
+		 */
 		model.setViewName("myreservation");
 		return model;
 	}

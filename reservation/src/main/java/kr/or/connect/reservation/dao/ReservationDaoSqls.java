@@ -24,5 +24,5 @@ public class ReservationDaoSqls {
 		    		  + "			:modifyDate)"; 
 	
 	public static final String INSERT_PRICES = 
-			"insert into reservation_info_price(reservation_info_id, product_price_id, count) values(:reservationInfoId, :productPriceId, :count)";
+			"INSERT INTO RESERVATION_INFO_PRICE(RESERVATION_INFO_ID, PRODUCT_PRICE_ID, COUNT) VALUES(:reservationInfoId, :productPriceId, :count)";
 }

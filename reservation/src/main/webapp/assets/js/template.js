@@ -1,19 +1,32 @@
 let handlebars = {
+	// main
 	category: undefined,
 	product : undefined,
 	promotion: undefined,
 	
+	// detail
 	titleImage : undefined,
 	comment: undefined,
 	productImageInfo: undefined,
 	
+	// review
 	review: undefined,
 	
+	// reserve
 	productDescription: undefined,
 	titleInfo : undefined,
 	storeDetails: undefined,
+	productPrices : undefined,
+	formData : undefined,
 	
-	stateType : undefined,
+	// myreservation
+	summaryInfo : undefined,
+	showUsedSection : undefined,
+	showConfirmedSection : undefined,
+	showCanceledSection: undefined,
+	
+	// login
+	showWarningMsg: undefined,
 	
 	precompile(registerTemplate, id, data) {
 		if (registerTemplate === undefined) {
@@ -78,13 +91,14 @@ let template = {
 		summaryInfo(data){
 			return handlebars.precompile(handlebars.summaryInfo, "#summaryInfo", data);
 		},
-		showUsedSection(data){
+		usedSection(data){
 			return handlebars.precompile(handlebars.showUsedSection, "#usedSection", data);
 		},
-		showConfirmedSection(data){
+		confirmSection(data){
+			console.log(data);
 			return handlebars.precompile(handlebars.showConfirmedSection, "#confirmSection", data);
 		},
-		showCanceledSection(data){
+		cancelSection(data){
 			return handlebars.precompile(handlebars.showCanceledSection, "#cancelSection", data);
 		},
 	},

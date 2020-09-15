@@ -19,21 +19,22 @@
 
 <body>
 	<input id="reservation_email" type="hidden"
-		value="${sessionScope.reservationEmail}" />
+		value="${reservationEmail}" />
 	<div id="container">
 		<div class="header">
 			<header class="header_tit" name="top">
 				<h1 class="logo">
 					<a href="./" class="lnk_logo" title="네이버"> <span
 						class="spr_bi ico_n_logo">네이버</span>
-					</a> <a href="./" class="lnk_logo" title="예약"> <span
-						class="spr_bi ico_bk_logo">예약</span>
+					</a> 
+					<a href="./" class="lnk_logo" title="예약"> 
+						<span class="spr_bi ico_bk_logo">예약</span>
 					</a>
 				</h1>
 				<c:choose>
 					<c:when test="${sessionScope.reservationEmail != null}">
 						<a href="myreservation" class="btn_my"> <span
-							class="viewReservation" title="이메일">${sessionScope.reservationEmail}</span>
+							class="viewReservation" title="이메일">${reservationEmail}</span>
 						</a>
 					</c:when>
 					<c:otherwise>
@@ -55,20 +56,10 @@
 				</div>
 				<!--// 예약 현황 -->
 
-				<!-- 내 예약 리스트 -->
-				<div class="wrap_mylist hide">
-					<ul class="list_cards" ng-if="bookedLists.length > 0">
-				<!--  		<li class="card" style="display: none;">
-							<div class="link_booking_details">
-								<div class="card_header">
-									<div class="left"></div>
-									<div class="middle">
-										<i class="spr_book2 ico_clock"></i> <span class="tit">예약신청중</span>
-									</div>
-									<div class="right"></div>
-								</div>
-							</div>	
-						</li> -->
+				<!-- 내 예약 리스트  wrap_mylist hide 추가 가능-->
+				<div class="wrap_mylist ">
+					<ul class="list_cards">
+				  	
 						<li class="card confirmed">
 							<div class="link_booking_details">
 								<div class="card_header">
@@ -169,14 +160,14 @@
 		<a href="#confirmed_summary" class="link_summary_board">
 			<i class="spr_book2 ico_book_ss"></i> 
 			<em class="tit">이용예정</em>
-			<span class="figure">{{usedCount}}</span>
+			<span class="figure">{{confirmedCount}}</span>
 		</a>
 	</li>
 	<li class="item">
 		<a href="#used_summary" class="link_summary_board">
 			<i class="spr_book2 ico_check"></i> 
-			<em class="tit">이용완료</em> 
-			<span class="figure">{{confirmedCount}}</span>
+			<em class="tit">이용완료</em>  
+			<span class="figure">{{usedCount}}</span>
 		</a>
 	</li>
 	<li class="item">
@@ -188,14 +179,13 @@
 </script>
 
 
-<script type="myTemplate" id="confirmSection">
-{{#if (isEmpty "confirmedReservation")}}
+<script type="myreservation_template" id="confirmSection">
+<!-- {{#if confirmReservation.length}}
 	<div class="err" style="dis">
 		<i class="spr_book ico_info_nolist"></i>
-		<h1 class="tit">확정된 예약 리스트가 없습니다</h1>
+		<h1 class="tit">이용 예약 리스트가 없습니다</h1>
 	</div>
-{{else}}
-	{{#confirmedReservation}}
+{{else}} -->
   	<article class="card_item">
     	<a href="#" class="link_booking_details">
     		<div class="card_body">
@@ -208,17 +198,15 @@
     						<li class="item">
     							<span class="item_tit">일정</span>
     							<em class="item_dsc">
-    								{{#changeDatePattern reservationDate}}
     									{{reservationDate}}
-    								{{/changeDatePattern}}
     							</em>
     						</li>
     						<li class="item">
     							<span class="item_tit">내역</span>
     							<em class="item_dsc">
     								{{#ticketInfo}}
-										{{convertPriceType priceTypeName}} ({{price}}원) {{count}}장 =>
-										{{purchasePrice price count}} 원<br>
+										{{priceTypeName}}: {{price}}원 {{count}}장	
+										<br>
 									{{/ticketInfo}}
     							</em>
     						</li>
@@ -239,9 +227,7 @@
     						<span class="price_tit">결제 예정금액</span>
     						<em class="price_amount">
     							<span>
-    								{{#changeCurrencyPattern ticketPrice}}
                    						{{ticketPrice}}
-               						{{/changeCurrencyPattern}}
     							</span>
     							<span class="unit">원</span>
     						</em>
@@ -261,18 +247,16 @@
     	</a>
     	<a href="#" class="fn fn-share1 naver-splugin btn_goto_share" title="공유하기"></a>
     </article>
-	{{/confirmedReservation}}
 {{/if}}
   </script>
 
-<script type="myTemplate" id="usedSection">
-{{#if (isEmpty "usedReservation")}}
+<script type="myreservation_template" id="usedSection">
+<!-- {{#if usedReservation}}
 	<div class="err" style="dis">
 		<i class="spr_book ico_info_nolist"></i>
 		<h1 class="tit">이용 예약 리스트가 없습니다</h1>
 	</div>
-{{else}}
-	{{#usedReservation}}
+{{else}} -->
   	<article class="card_item">
     	<a href="#" class="link_booking_details">
     		<div class="card_body">
@@ -285,17 +269,15 @@
     						<li class="item">
     							<span class="item_tit">일정</span>
     							<em class="item_dsc">
-    								{{#changeDatePattern reservationDate}}
-    									{{reservationDate}}
-    								{{/changeDatePattern}}
+    								{{reservationDate}}
     							</em>
     						</li>
     						<li class="item">
     							<span class="item_tit">내역</span>
     							<em class="item_dsc">
     								{{#ticketInfo}}
-										{{convertPriceType priceTypeName}} ({{price}}원) {{count}}장 =>
-										{{purchasePrice price count}} 원<br>
+										{{priceTypeName}}: {{price}}원 {{count}}장 
+										<br>
 									{{/ticketInfo}}
     							</em>
     						</li>
@@ -317,12 +299,10 @@
     						</li>
     					</ul>
     					<div class="price_summary">
-    						<span class="price_tit">결제 예정금액</span>
+    						<span class="price_tit">결제 완료금액</span>
     						<em class="price_amount">
     							<span>
-    								{{#changeCurrencyPattern totalPrice}}
-                   						{{totalPrice}}
-               						{{/changeCurrencyPattern}}
+    								{{ticketPrice}}
     							</span>
     							<span class="unit">원</span>
     						</em>
@@ -342,11 +322,10 @@
     		</div>
     	</a>
     </article>
-	{{/usedReservation}}
-{{/if}}
+<!--{{/if}} -->
   </script>
 
-<script type="myTemplate" id="cancelSection">
+<script type="myreservation_template" id="cancelSection">
   <article class="card_item">
     	<a href="#" class="link_booking_details">
     		<div class="card_body">
@@ -359,9 +338,7 @@
     						<li class="item">
     							<span class="item_tit">일정</span>
     							<em class="item_dsc">
-    								{{#changeDatePattern reservationDate}}
-    									{{reservationDate}}
-    								{{/changeDatePattern}}
+    								{{reservationDate}}
     							</em>
     						</li>
     						<li class="item">
@@ -391,9 +368,7 @@
     						<span class="price_tit">결제 예정금액</span>
     						<em class="price_amount">
     							<span>
-    								{{#changeCurrencyPattern totalPrice}}
                    						{{totalPrice}}
-               						{{/changeCurrencyPattern}}
     							</span>
     							<span class="unit">원</span>
     						</em>

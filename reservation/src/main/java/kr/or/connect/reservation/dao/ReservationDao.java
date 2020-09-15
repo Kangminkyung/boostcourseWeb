@@ -36,7 +36,6 @@ public class ReservationDao {
 	}
 
 	public int insertReservation(ReservationForm reservationform) {
-		
 		LocalDateTime now = LocalDateTime.ofInstant(new Date().toInstant(), ZoneId.systemDefault());
 		KeyHolder holder = new GeneratedKeyHolder();
 
@@ -59,21 +58,16 @@ public class ReservationDao {
 	}
 
 	public void insertPrices(ReservationForm reservationForm, int reservationInfoId) {
-		Map<String, Integer> params = new HashMap<>();
 		List<ReservationPrice> prices = reservationForm.getReservationPrices();
 		
+		// 2. reservation_info table 업데이트
 		for(ReservationPrice price : prices) {
-			System.out.println("reservationInfoId: " + reservationInfoId);
-			System.out.println("productPriceId: " + price.getProductPriceId());
-			System.out.println("count: " + price.getCount());
-
-		}
-		
-		for(ReservationPrice price : prices) {
-			params.put("reservationInfoId", reservationInfoId);
-			params.put("productPriceId", price.getProductPriceId());
-			params.put("count", price.getCount());
-			jdbc.update("INSERT_PRICES", params);
+			SqlParameterSource paramSource = new MapSqlParameterSource()
+					.addValue("reservationInfoId", reservationInfoId)
+					.addValue("productPriceId", price.getProductPriceId())
+					.addValue("count", price.getCount());
+			
+			jdbc.update(INSERT_PRICES, paramSource);
 		}
 	}
 	

@@ -15,9 +15,13 @@ public class MyReservationService {
 	@Autowired
 	private MyReservationDao myReservationDao;
 	
+	// email로 예약 건수가 있는지 조회
+	public int getTotalReservationCountByEmail(String reservationEmail) {
+		return myReservationDao.selectTotalReservationCountByEmail(reservationEmail);
+	}
+	
 	// email로 내 전체 예약 리스트 불러오기
 	public List<MyReservation> getTotalReservationByEmail(String reservationEmail) {
-		System.out.println("service : "+reservationEmail);
 		return myReservationDao.selectTotalReservationByEmail(reservationEmail);
 	}
 
@@ -25,15 +29,12 @@ public class MyReservationService {
 	public List<TicketInfo> getTicketInfo(int reservationId) {
 		return myReservationDao.selectTicketInfo(reservationId);
 	}
-	
-	// 예약 건수 가져오기 by reservationEmail
-	public int getReservationCount(String reservationEmail) {
-		return myReservationDao.getReservationCount(reservationEmail);
+
+	// 하나의 예약 리스트 정보 불러오기
+	public MyReservation getMyListByReservationId(int reservationId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
-
-
-
-
-
 	
+
 }

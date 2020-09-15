@@ -10,6 +10,7 @@ public class ReservationForm {
 	private String reservationName; // 예약자명
 	private String reservationTel; // 예약자 전화번호
 	private String reservationDate; // 예약일
+	
 	public int getDisplayInfoId() {
 		return displayInfoId;
 	}

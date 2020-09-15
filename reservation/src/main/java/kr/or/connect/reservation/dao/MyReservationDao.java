@@ -29,17 +29,19 @@ public class MyReservationDao {
 		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
 	}
 	
+
+	public int selectTotalReservationCountByEmail(String reservationEmail) {
+		Map<String, String> params = new HashMap<>();
+		params.put("reservationEmail", reservationEmail);
+		return jdbc.queryForObject(SELECT_TOTAL_RESERVATION_COUNT_BY_EMAIL, params, Integer.class);
+	}
+
 	public List<MyReservation> selectTotalReservationByEmail(String reservationEmail) {
 		Map<String, String> params = new HashMap<>();
-		List<MyReservation> myList = Collections.emptyList();
+		List<MyReservation> myList = null;
 		
-		try {
-			System.out.println("dao : "+reservationEmail);
-			params.put("reservationEmail", reservationEmail);
-			myList = jdbc.query(SELECT_TOTAL_RESERVATION_BY_EMAIL, params, myReservationMapper);		
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
+		params.put("reservationEmail", reservationEmail);
+		myList = jdbc.query(SELECT_TOTAL_RESERVATION_BY_EMAIL, params, myReservationMapper);	
 		
 		return myList;		
 	}
@@ -59,32 +61,6 @@ public class MyReservationDao {
 		return tickets;
 	}
 
-	public int getReservationCount(String reservationEmail) {
-		
-		Map<String, String> params = new HashMap<>();
-		params.put("reservationEmail", reservationEmail);
-
-		return jdbc.queryForObject(GET_RESERVATION_COUNT_BY_RESERVATIONEMAIL, params, Integer.class);
-	}
-
 	
-	
-	public int getTotalPrice(int reservationId) {
-		
-		int totalPrice = 0;
-		Map<String, Integer> params = new HashMap<>();
-		params.put("reservationId", reservationId);
-
-		List<TicketInfo> myPrices = null;
-		myPrices = jdbc.query("GET_TICKETINFO_BY_RESERVATION_ID", params, ticketInfoMapper);
-		
-		for(TicketInfo tickets : myPrices) {
-			totalPrice += tickets.getPrice() * tickets.getCount();
-		}
-
-		System.out.println("totalPrice: " + totalPrice);
-		return totalPrice;
-		
-	}
 
 }
