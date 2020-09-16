@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -73,66 +74,56 @@ public class MyreservationController {
 	public Map<String, Object> getMyListByEmail(@PathVariable("reservationEmail") String reservationEmail, HttpServletResponse response) throws ParseException, IOException{
 		
 		Map<String, Object> params = new HashMap<>();
-		
-		int count = 0;
-		
+				
 		// 이메일 .com으로 받아오면 406 에러뜸
 		// co.kr로 예약하면 문제없이 잘 뜸
-		
-		count = myReservationService.getTotalReservationCountByEmail(reservationEmail);
-		
-		System.out.println("count : "+count);
-		// 이메일 조회시 등록된 예약 건수가 존재함
-		if(count != 0) {
-			List<MyReservation> totalReservationList = myReservationService.getTotalReservationByEmail(reservationEmail);
-			List<MyReservation> canceledReservation = new ArrayList<>();
-			List<MyReservation> confirmedReservation = new ArrayList<>();
-			List<MyReservation> usedReservation = new ArrayList<>();
-			
-			for(MyReservation myList : totalReservationList) {
-				List<TicketInfo> tickets = myReservationService.getTicketInfo(myList.getReservationId());
-			
-				myList.setTicketInfo(tickets);
-				Status status = this.ClassifyList(myList);
 				
-				switch(status) {
-				case CANCEL :
-					canceledReservation.add(myList);
-					break;
-					
-				case CONFIRMED :
-					confirmedReservation.add(myList);
-					break;
-					
-				case  USED:
-					usedReservation.add(myList);
-					break;
-				}
-			}
+		List<MyReservation> totalReservationList = myReservationService.getTotalReservationByEmail(reservationEmail);
+		List<MyReservation> canceledReservation = new ArrayList<>();
+		List<MyReservation> confirmedReservation = new ArrayList<>();
+		List<MyReservation> usedReservation = new ArrayList<>();
 			
-			params.put("canceledReservation", canceledReservation);
-			params.put("confirmedReservation", confirmedReservation);
-			params.put("usedReservation", usedReservation);
-
-		}else { // 이메일로 등록된 예약 건수가 없음
-			System.out.println("아이디 존재 하지 않음");
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>alert('이메일이 존재하지 않습니다'); location.href='http://localhost:8080/reservation/bookingloginPage';</script>");
-			 
-			out.flush();
+		for(MyReservation myList : totalReservationList) {
+			List<TicketInfo> tickets = myReservationService.getTicketInfo(myList.getReservationId());
+			
+			myList.setTicketInfo(tickets);
+			Status status = this.ClassifyList(myList);
+			
+			switch(status) {
+			case CANCEL :
+				canceledReservation.add(myList);
+				break;
+					
+			case CONFIRMED :
+				confirmedReservation.add(myList);
+				break;
+					
+			case  USED:
+				usedReservation.add(myList);
+				break;
+			}
 		}
+			
+		params.put("canceledReservation", canceledReservation);
+		params.put("confirmedReservation", confirmedReservation);
+		params.put("usedReservation", usedReservation);
+
 		
 		return params;
 	}
 	
-	@GetMapping(path = "/{reservationEmail:.+}/{reservationId}")
+	@GetMapping(path = "/reservations/id")
 	public Map<String, Object> getOneListByEmail(@RequestParam(name = "reservationId", required = false, defaultValue = "") int reservationId){
 	
 		Map<String, Object> params = new HashMap<>();
-		MyReservation myList = myReservationService.getMyListByReservationId(reservationId);
-		params.put("myList", myList);
+		MyReservation myreservation = myReservationService.getMyListByReservationId(reservationId);
+	
+		params.put("Myreservation", myreservation);
 		return params;
 	}
 
+	@PutMapping(path = "/reservations")
+	public int cancelReservation(@RequestParam(name = "reservationId", required = false, defaultValue = "") int reservationId) {
+		return myReservationService.cancelReservation(reservationId);
+	}
 }

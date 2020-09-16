@@ -99,13 +99,6 @@
 					</ul>
 				</div>
 				<!--// 내 예약 리스트 -->
-
-				<!-- 예약 리스트 없음 -->
-				<div class="err">
-					<i class="spr_book ico_info_nolist"></i>
-					<h1 class="tit">예약 리스트가 없습니다</h1>
-				</div>
-				<!--// 예약 리스트 없음 -->
 			</div>
 		</div>
 		<hr />
@@ -123,31 +116,11 @@
 	</footer>
 
 	<!-- 취소 팝업 -->
-	<div class="popup_booking_wrapper hide">
-		<div class="dimm_dark" style="display: block"></div>
-		<div class="popup_booking refund">
-			<h1 class="pop_tit">
-				<span>서비스명/상품명</span> <small class="sm">2000.0.00.(월)2000.0.00.(일)</small>
-			</h1>
-			<div class="nomember_alert">
-				<p>취소하시겠습니까?</p>
-			</div>
-			<div class="pop_bottom_btnarea">
-				<div class="btn_gray">
-					<a href="#" class="btn_bottom no_btn"><span>아니오</span></a>
-				</div>
-				<div class="btn_green">
-					<a href="#" class="btn_bottom yes_btn"><span>예</span></a>
-				</div>
-			</div>
-			<!-- 닫기 -->
-			<a href="#" class="popup_btn_close" title="close"> <i
-				class="spr_book2 ico_cls"></i>
-			</a>
-			<!--// 닫기 -->
-		</div>
+	<!-- [D] 활성화 display:block, 아니오 버튼 or 닫기 버튼 클릭 시 숨김 display:none; -->
+	<div class="popup_booking_wrapper" style="display: none;">
+		<!-- popup -->
 	</div>
-	<!--// 취소 팝업 -->
+
 </body>
 
 <script type="myreservation_template" id="summaryInfo">
@@ -178,15 +151,8 @@
 	</li>
 </script>
 
-
 <script type="myreservation_template" id="confirmSection">
-<!-- {{#if confirmReservation.length}}
-	<div class="err" style="dis">
-		<i class="spr_book ico_info_nolist"></i>
-		<h1 class="tit">이용 예약 리스트가 없습니다</h1>
-	</div>
-{{else}} -->
-  	<article class="card_item">
+  	<article class="card_item" data-id="{{reservationId}}>
     	<a href="#" class="link_booking_details">
     		<div class="card_body">
     			<div class="left"></div>
@@ -227,12 +193,13 @@
     						<span class="price_tit">결제 예정금액</span>
     						<em class="price_amount">
     							<span>
-                   						{{ticketPrice}}
+                   					{{ticketPrice}}
     							</span>
     							<span class="unit">원</span>
     						</em>
     					</div>
-    					<div class="booking_cancel">
+						<!-- [D] 예약 신청중, 예약 확정 만 취소가능, 취소 버튼 클릭 시 취소 팝업 활성화 -->
+    					<div class="booking_cancel" id="cancelScope" reservationId ={{reservationId}}>
     						<button class="btn"><span>취소</span></button>
     					</div>
     				</div>
@@ -247,17 +214,10 @@
     	</a>
     	<a href="#" class="fn fn-share1 naver-splugin btn_goto_share" title="공유하기"></a>
     </article>
-{{/if}}
   </script>
 
 <script type="myreservation_template" id="usedSection">
-<!-- {{#if usedReservation}}
-	<div class="err" style="dis">
-		<i class="spr_book ico_info_nolist"></i>
-		<h1 class="tit">이용 예약 리스트가 없습니다</h1>
-	</div>
-{{else}} -->
-  	<article class="card_item">
+  	<article class="card_item" data-id="{{reservationId}}">
     	<a href="#" class="link_booking_details">
     		<div class="card_body">
     			<div class="left"></div>
@@ -307,9 +267,12 @@
     							<span class="unit">원</span>
     						</em>
     					</div>
-    					<div class="booking_cancel">
-    						<a href="#"><button class="btn"><span>예매자 리뷰
-    									남기기</span></button></a>
+    					<div class="booking_cancel" id="reviewScope" reservationId={{reservationId}}>
+    						<a href="#">
+								<button class="btn">
+									<span>예매자 리뷰남기기</span>
+								</button>
+							</a>
     					</div>
     				</div>
     			</div>
@@ -322,18 +285,17 @@
     		</div>
     	</a>
     </article>
-<!--{{/if}} -->
-  </script>
+ </script>
 
 <script type="myreservation_template" id="cancelSection">
-  <article class="card_item">
+  <article class="card_item" data-id="{{reservationId}}>
     	<a href="#" class="link_booking_details">
     		<div class="card_body">
     			<div class="left"></div>
     			<div class="middle">
     				<div class="card_detail">
-    					<em class="booking_number">No.{{reservationInfoId}}</em>
-    					<h4 class="tit">{{productDescription}}</h4>
+    					<em class="booking_number">No.{{reservationId}}</em>
+    					<h4 class="tit">{{description}}</h4>
     					<ul class="detail">
     						<li class="item">
     							<span class="item_tit">일정</span>
@@ -344,7 +306,11 @@
     						<li class="item">
     							<span class="item_tit">내역</span>
     							<em class="item_dsc">
-    								내역이 없습니다.
+    								{{#ticketInfo}}
+										{{priceTypeName}}: {{price}}원 {{count}}장 
+										<br>
+									{{/ticketInfo}}
+    							</em>
     							</em>
     						</li>
     						<li class="item">
@@ -368,7 +334,7 @@
     						<span class="price_tit">결제 예정금액</span>
     						<em class="price_amount">
     							<span>
-                   						{{totalPrice}}
+                   					{{ticketPrice}}
     							</span>
     							<span class="unit">원</span>
     						</em>
@@ -384,6 +350,72 @@
     		</div>
     	</a>
     </article>
- </script>
+</script>
+ 
+<script type="myreservation_template" id="emptySection">
+	<div class="err" style="dis">
+		<i class="spr_book ico_info_nolist"></i>
+		<h1 class="tit">{{reservationType}} 리스트가 없습니다</h1>
+	</div>
+</script>
 
+<script type="myreservation_template" id="cancelPopup">
+	<div class="dimm_dark" style="display: block"></div>
+	<div class="popup_booking refund">
+		<h1 class="pop_tit">
+			<span>서비스명/상품명</span> 
+			<span>{{description}}</span>
+			<small class="sm">예약일: {{reservationDate}}</small>
+			<small class="sm">내역: 총 {{ticketCount}}장</small>
+			<small class="sm">결제금액: 총 {{ticketPrice}}원</small>
+
+		</h1>
+		<div class="nomember_alert">
+			<p>취소하시겠습니까?</p>
+		</div>
+		<div class="pop_bottom_btnarea" id="cancelId">
+			<div class="btn_gray">
+				<a href="#" class="btn_bottom no_btn"><span>아니오</span></a>
+			</div>
+			<div class="btn_green" reservationId ={{reservationId}}>
+				<a href="#" class="btn_bottom yes_btn"><span>예</span></a>
+			</div>
+		</div>
+		<!-- 닫기 -->
+		<a href="#" class="popup_btn_close" title="close"> 
+			<i class="spr_book2 ico_cls"></i>
+		</a>
+		<!--// 닫기 -->
+	</div>
+</script>
+
+<script type="myreservation_template" id="reviewPopup">
+	<div class="dimm_dark" style="display: block"></div>
+	<div class="popup_booking refund">
+		<h1 class="pop_tit">
+			<span>서비스명/상품명</span> 
+			<span>{{description}}</span>
+			<small class="sm">예약일: {{reservationDate}}</small>
+			<small class="sm">내역: 총 {{ticketCount}}장</small>
+			<small class="sm">결제금액: 총 {{ticketPrice}}원</small>
+
+		</h1>
+		<div class="nomember_alert">
+			<p>리뷰를 남기시겠습니까?</p>
+		</div>
+		<div class="pop_bottom_btnarea" id="reviewId">
+			<div class="btn_gray">
+				<a href="#" class="btn_bottom no_btn"><span>아니오</span></a>
+			</div>
+			<div class="btn_green" reservationId ={{reservationId}} productId = {{productId}}>
+				<a href="#" class="btn_bottom yes_btn"><span>예</span></a>
+			</div>
+		</div>
+		<!-- 닫기 -->
+		<a href="#" class="popup_btn_close" title="close"> 
+			<i class="spr_book2 ico_cls"></i>
+		</a>
+		<!--// 닫기 -->
+	</div>
+</script>
 </html>

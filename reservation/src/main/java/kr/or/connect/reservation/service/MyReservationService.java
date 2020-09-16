@@ -32,8 +32,12 @@ public class MyReservationService {
 
 	// 하나의 예약 리스트 정보 불러오기
 	public MyReservation getMyListByReservationId(int reservationId) {
-		// TODO Auto-generated method stub
-		return null;
+		return myReservationDao.selectMyListByReservationId(reservationId);
+	}
+
+	// 예약 취소
+	public int cancelReservation(int reservationId) {
+		return myReservationDao.updateReservationCancelFlag(reservationId);
 	}
 	
 

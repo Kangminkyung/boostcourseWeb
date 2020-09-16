@@ -21,14 +21,18 @@ let handlebars = {
 	
 	// myreservation
 	summaryInfo : undefined,
-	showUsedSection : undefined,
-	showConfirmedSection : undefined,
-	showCanceledSection: undefined,
+	usedSection : undefined,
+	confirmedSection : undefined,
+	canceledSection: undefined,
+	emptySection : undefined,
+	reviewPopup : undefined,
+	cancelPopup : undefined,
 	
 	// login
 	showWarningMsg: undefined,
 	
 	precompile(registerTemplate, id, data) {
+		
 		if (registerTemplate === undefined) {
 			let template = document.querySelector(id).innerText; // 핸들바 템플릿 가져오기
 			registerTemplate = Handlebars.compile(template); // 핸들바 템플릿 컴파일
@@ -95,12 +99,21 @@ let template = {
 			return handlebars.precompile(handlebars.showUsedSection, "#usedSection", data);
 		},
 		confirmSection(data){
-			console.log(data);
 			return handlebars.precompile(handlebars.showConfirmedSection, "#confirmSection", data);
 		},
 		cancelSection(data){
 			return handlebars.precompile(handlebars.showCanceledSection, "#cancelSection", data);
 		},
+		emptySection(data){
+			return handlebars.precompile(handlebars.emptySection, "#emptySection", data);
+		},
+		reviewPopup(data){
+			return handlebars.precompile(handlebars.emptySection, "#reviewPopup", data);
+		},
+		cancelPopup(data){
+			return handlebars.precompile(handlebars.emptySection, "#cancelPopup", data);
+
+		}
 	},
 
 	login: {

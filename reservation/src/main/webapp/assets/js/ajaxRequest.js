@@ -14,5 +14,6 @@ let ajaxRequest = {
 		
 		xhr.open(method, url);
 		xhr.send();
-	}
+	},
+
 }

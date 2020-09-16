@@ -61,6 +61,34 @@ public class MyReservationDao {
 		return tickets;
 	}
 
+
+	public MyReservation selectMyListByReservationId(int reservationId) {
+		MyReservation myreservation = new MyReservation();
+		Map<String, Integer> params = new HashMap<>();
+		
+		try {
+			params.put("reservationId", reservationId);
+			myreservation = jdbc.queryForObject(SELECT_MYLIST_BY_RESERVATIOM_ID, params,myReservationMapper);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return myreservation;
+	}
+
+
+	public int updateReservationCancelFlag(int reservationId) {
+		int updateCount = 0;
+		Map<String, Integer> params = new HashMap<>();
+		try {
+			params.put("reservationId", reservationId);
+			updateCount = jdbc.update(UPDATE_RESERVATION_CANCELFLAG, params);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
+		return updateCount;
+	}
+
 	
 
 }

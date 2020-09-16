@@ -64,13 +64,18 @@ public class PageController {
 		return reserve;
 	}
 	
-	// 로그인 -> 나의 예매 페이지
+	// 로그인 -> 나의 예매 페이지 
 	@GetMapping(path = "/myreservation")
-	public ModelAndView myreservationPage(ModelAndView model, HttpServletRequest request, HttpSession session) throws IOException {
+	public ModelAndView myreservationPage(HttpServletResponse response, HttpServletRequest request,HttpSession session) throws IOException {
 	
+		ModelAndView model = new ModelAndView();
 		String reservationEmail = request.getParameter("reservationEmail");
-		System.out.println(("pageController /myreservation , reservationEmail = "+reservationEmail));
-/*		if(session.getAttribute("email") == null && myReservationService.getTotalReservationCountByEmail(reservationEmail) > 0) {
+		System.out.println("pageController /myreservation , reservationEmail = "+reservationEmail);
+		
+		int count = 0;
+		count = myReservationService.getTotalReservationCountByEmail(reservationEmail);
+		
+	/*	if(session.getAttribute("email") == null && myReservationService.getTotalReservationCountByEmail(reservationEmail) > 0) {
 			session.setAttribute("reservationEmail", reservationEmail);
 		}else if(myReservationService.getTotalReservationCountByEmail(reservationEmail) == 0) {
 			System.out.println("아이디가 존재하지 않습니다.");
@@ -78,9 +83,21 @@ public class PageController {
 	
 		System.out.println("세션 확인: "+ session.getAttribute(reservationEmail));
 		System.out.println("pageController reservationEmail: " + reservationEmail);
-		 */
+		*/
+		
+		// 아이디가 존재하지 않는 경우 로그인 페이지로 이동
+		if(count == 0) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('아이디가 존재하지 않습니다!!'); location.href='http://localhost:8080/reservation/bookingloginPage';</script>"); 
+			out.flush();
+			model.setViewName("bookinglogin");
+		}
+		
+		// 아이디가 존재 할 경우 myreservation 페이지로 이동
 		model.setViewName("myreservation");
 		return model;
+		
 	}
 	
 }
