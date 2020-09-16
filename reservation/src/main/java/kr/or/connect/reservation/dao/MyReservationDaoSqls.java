@@ -21,7 +21,9 @@ public class MyReservationDaoSqls {
 			"	JOIN RESERVATION_INFO_PRICE D ON A.ID = D.RESERVATION_INFO_ID " + 
 			"	JOIN PRODUCT_PRICE E ON D.PRODUCT_PRICE_ID = E.ID " + 
 			"WHERE A.RESERVATION_EMAIL = :reservationEmail " +
-			"GROUP BY A.ID";
+			"GROUP BY A.ID " +
+			"ORDER BY A.ID DESC";
+
 	
 	public static final String SELECT_TICKET_INFO = 
 			"SELECT B.PRICE_TYPE_NAME AS PRICETYPENAME, " + 
@@ -55,7 +57,8 @@ public class MyReservationDaoSqls {
 			"	JOIN RESERVATION_INFO_PRICE D ON A.ID = D.RESERVATION_INFO_ID " + 
 			"	JOIN PRODUCT_PRICE E ON D.PRODUCT_PRICE_ID = E.ID " + 
 			"WHERE A.ID = :reservationId " + 
-			"GROUP BY A.ID ";
+			"GROUP BY A.ID " +
+			"ORDER BY A.ID DESC";
 	
 	public static final String UPDATE_RESERVATION_CANCELFLAG = 
 			"UPDATE RESERVATION_INFO SET CANCEL_FLAG = 1 WHERE ID = :reservationId ";

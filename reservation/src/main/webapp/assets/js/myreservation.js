@@ -19,6 +19,11 @@ Mypage.prototype.init = function(){
 	Mypage.prototype.initLists();
 };
 
+Mypage.prototype.updateInit = function(res, reservationId){
+	Mypage.prototype.initSummary();
+ 	Mypage.prototype.initUpdateLists(res, reservationId);
+};
+
 Mypage.prototype.initSummary = function(){
 	console.log("initSummary 실행");
 
@@ -45,8 +50,6 @@ Mypage.prototype.showSummary = function(res){
 
 	// totalCount 갱신		
 	summaryHtml.totalCount = summaryHtml.canceledCount + summaryHtml.confirmedCount + summaryHtml.usedCount;
-	console.log(summaryHtml.totalCount);
-
 	document.querySelector(".summary_board").innerHTML = template.myreservation.summaryInfo(summaryHtml);	
 };
 
@@ -195,6 +198,7 @@ Mypage.prototype.addPopupButtionClick = function(){
 						let reservationId = event.target.closest(".btn_green").getAttribute("reservationId");
 						let productId = event.target.closest(".btn_green").getAttribute("productId");
 						
+						// 리뷰작성 페이지로 넘어감
 						location.href="/reviewWrite";
 					}
 				}else if(event.target.innerText === "아니오"){
@@ -208,11 +212,55 @@ Mypage.prototype.addPopupButtionClick = function(){
 // 4. 예약 취소 기능 추가
 Mypage.prototype.cancelReservation = function(reservationId){
 	console.log("cancel reservation함수");
-	ajaxRequest.sendRequest("PUT", "api/myreservationPage/reservations?reservationId="+reservationId, this.init);
 	
+	let xhr = new XMLHttpRequest();
+	xhr.open("PUT", "api/myreservationPage/reservations?reservationId="+reservationId, true);
+	xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+	
+	xhr.addEventListener("load", function(){
+		this.updateInit(JSON.parse(xhr.responseText), reservationId) // 팝업창에 템플릿 삽입
+		}.bind(this)
+	);
+	xhr.send();
+		
 };
 
-	
+Mypage.prototype.initUpdateLists = function(res, reservationId){
+	let reservationEmail = this.getParameters();
 
+	console.log("initUpdateLists 실행");
+	console.log(res);
+	Mypage.prototype.updateNewSection(reservationId);
+	this.addButtonClick();
+	this.addPopupButtionClick();
+	
+	
+};
+	
+Mypage.prototype.updateNewSection = function(reservationId){
+	console.log(reservationId);
+	
+	// 이용예정에 있는 섹션을 취소 섹션으로 옮김
+	let cardTemp = document.querySelector(".card_item");
+	console.log(cardTemp);
+	
+	if(document.querySelector(".card_item").id = reservationId){
+		document.querySelector(".card_item").remove();
+		console.log("삭제함");
+	}
+	
+	// cancel 섹션에 해당 아이디의 정보 템플릿을 추가함
+	ajaxRequest.sendRequest("GET", "api/myreservationPage/reservations/id?reservationId="+reservationId, this.addCancel); 
+};
+
+Mypage.prototype.addCancel= function(res) {
+	let addSections = res.response.Myreservation;
+
+	// priceTypeName => 직관적으로 변경시킴
+	for(let i=0; i<addSections.ticketInfo.length; i++){
+		addSections.ticketInfo[i].priceTypeName = Mypage.prototype.getPriceType(addSections.ticketInfo[i].priceTypeName);
+	};
+	document.querySelector(".card.used.cancel").innerHTML += template.myreservation.cancelSection(addSections);
+};
 
 

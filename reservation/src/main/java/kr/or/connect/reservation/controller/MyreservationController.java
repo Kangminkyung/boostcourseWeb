@@ -43,7 +43,6 @@ public class MyreservationController {
 	private Status ClassifyList(MyReservation MyReservation) throws ParseException {
 		
 		if(MyReservation.getCancelFlag() == 1) {
-			System.out.println("cancel 임");
 			return Status.CANCEL;
 		}else {
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -59,11 +58,8 @@ public class MyreservationController {
 			int diff = (int) (diffMillis / (24 * 60 * 60 * 1000));
 
 			if (diff > 0) {
-				System.out.println("used임");
 				return Status.USED;
 			} else {
-				System.out.println("confirm임");
-
 				return Status.CONFIRMED;
 			}
 		}
@@ -118,6 +114,9 @@ public class MyreservationController {
 		Map<String, Object> params = new HashMap<>();
 		MyReservation myreservation = myReservationService.getMyListByReservationId(reservationId);
 	
+		List<TicketInfo> tickets = myReservationService.getTicketInfo(myreservation.getReservationId());
+		myreservation.setTicketInfo(tickets);
+
 		params.put("Myreservation", myreservation);
 		return params;
 	}
