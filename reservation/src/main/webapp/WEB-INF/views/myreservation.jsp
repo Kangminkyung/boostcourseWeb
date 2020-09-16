@@ -19,7 +19,7 @@
 
 <body>
 	<input id="reservation_email" type="hidden"
-		value="${reservationEmail}" />
+		value="${sessionScope.email}" />
 	<div id="container">
 		<div class="header">
 			<header class="header_tit" name="top">
@@ -31,10 +31,12 @@
 						<span class="spr_bi ico_bk_logo">예약</span>
 					</a>
 				</h1>
-				<c:choose>
-					<c:when test="${sessionScope.reservationEmail != null}">
-						<a href="myreservation" class="btn_my"> <span
-							class="viewReservation" title="이메일">${reservationEmail}</span>
+				
+				<!-- session에 저장된 이메일이 있으면 이메일이 보여지고 아니면 예약확인 아이콘이 보이게 설정함 -->
+				<c:choose>				
+					<c:when test="${sessionScope.email != null}">
+						<a href="<%=request.getContextPath()%>/myreservation?reservationEmail=${sessionScope.email}" class="btn_my"> <span
+							class="viewReservation" title="이메일">${sessionScope.email}</span>
 						</a>
 					</c:when>
 					<c:otherwise>

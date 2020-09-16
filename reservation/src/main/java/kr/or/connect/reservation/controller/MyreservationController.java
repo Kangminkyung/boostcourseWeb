@@ -126,4 +126,6 @@ public class MyreservationController {
 	public int cancelReservation(@RequestParam(name = "reservationId", required = false, defaultValue = "") int reservationId) {
 		return myReservationService.cancelReservation(reservationId);
 	}
+	
+
 }

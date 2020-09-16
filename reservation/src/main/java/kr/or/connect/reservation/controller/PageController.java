@@ -75,16 +75,6 @@ public class PageController {
 		int count = 0;
 		count = myReservationService.getTotalReservationCountByEmail(reservationEmail);
 		
-	/*	if(session.getAttribute("email") == null && myReservationService.getTotalReservationCountByEmail(reservationEmail) > 0) {
-			session.setAttribute("reservationEmail", reservationEmail);
-		}else if(myReservationService.getTotalReservationCountByEmail(reservationEmail) == 0) {
-			System.out.println("아이디가 존재하지 않습니다.");
-		}
-	
-		System.out.println("세션 확인: "+ session.getAttribute(reservationEmail));
-		System.out.println("pageController reservationEmail: " + reservationEmail);
-		*/
-		
 		// 아이디가 존재하지 않는 경우 로그인 페이지로 이동
 		if(count == 0) {
 			response.setContentType("text/html; charset=UTF-8");
@@ -92,6 +82,11 @@ public class PageController {
 			out.println("<script>alert('아이디가 존재하지 않습니다!!'); location.href='http://localhost:8080/reservation/bookingloginPage';</script>"); 
 			out.flush();
 			model.setViewName("bookinglogin");
+		}else {
+			// 아이디가 존재 할 경우 세션에 등록한다. 
+			if(session.getAttribute("email") == null) {
+				session.setAttribute("email", reservationEmail);
+			}
 		}
 		
 		// 아이디가 존재 할 경우 myreservation 페이지로 이동

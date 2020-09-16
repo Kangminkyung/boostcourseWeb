@@ -26,7 +26,20 @@
 					<a href="https://www.naver.com" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
 					<a href="#" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
 				</h1>
-				  <a href="#" class="btn_my"> <span title="예약확인">예약확인</span> </a>
+				
+				<!-- session에 저장된 이메일이 있으면 이메일이 보여지고 아니면 예약확인 아이콘이 보이게 설정함 -->				 
+				 <c:choose>				
+					<c:when test="${sessionScope.email != null}">
+						<a href="<%=request.getContextPath()%>/myreservation?reservationEmail=${sessionScope.email}" class="btn_my"> <span
+							class="viewReservation" title="이메일">${sessionScope.email}</span>
+						</a>
+					</c:when>
+					<c:otherwise>
+						<a href="bookingLoginForm" class="btn_my"> <span
+							class="viewReservation" title="예약확인">예약확인</span>
+						</a>
+					</c:otherwise>
+				</c:choose>
 			</header>
 		</div>
         <div class="ct" data-display-id = "${displayInfoId}">

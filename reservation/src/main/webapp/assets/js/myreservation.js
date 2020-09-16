@@ -20,6 +20,8 @@ Mypage.prototype.init = function(){
 };
 
 Mypage.prototype.initSummary = function(){
+	console.log("initSummary 실행");
+
 	let reservationEmail = Mypage.prototype.getParameters();
 	ajaxRequest.sendRequest("GET", "api/myreservationPage/"+reservationEmail, this.showSummary); 
 	
@@ -52,6 +54,7 @@ Mypage.prototype.showSummary = function(res){
 Mypage.prototype.initLists = function(){
 	let reservationEmail = this.getParameters();
 	
+	console.log("initLists 실행");
 	ajaxRequest.sendRequest("GET", "api/myreservationPage/"+reservationEmail, this.updateSections); 
 	this.addButtonClick();
 	this.addPopupButtionClick();
@@ -183,8 +186,6 @@ Mypage.prototype.addPopupButtionClick = function(){
 				if(event.target.innerText === "예"){
 					if(event.target.closest(".pop_bottom_btnarea").getAttribute("id") === "cancelId"){
 						let reservationId = event.target.closest("div").getAttribute("reservationId");
-						
-						console.log("취소 addPopupButtionClick 클릭"+ reservationId);
 						Mypage.prototype.cancelReservation(reservationId);
 						popup.style.display = "none";
 						
@@ -194,7 +195,7 @@ Mypage.prototype.addPopupButtionClick = function(){
 						let reservationId = event.target.closest(".btn_green").getAttribute("reservationId");
 						let productId = event.target.closest(".btn_green").getAttribute("productId");
 						
-					//	location.href="/";
+						location.href="/reviewWrite";
 					}
 				}else if(event.target.innerText === "아니오"){
 					popup.style.display = "none";
