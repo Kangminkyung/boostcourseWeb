@@ -365,7 +365,6 @@
 	<div class="dimm_dark" style="display: block"></div>
 	<div class="popup_booking refund">
 		<h1 class="pop_tit">
-			<span>서비스명/상품명</span> 
 			<span>{{description}}</span>
 			<small class="sm">예약일: {{reservationDate}}</small>
 			<small class="sm">내역: 총 {{ticketCount}}장</small>

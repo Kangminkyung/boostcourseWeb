@@ -70,7 +70,6 @@ public class PageController {
 	
 		ModelAndView model = new ModelAndView();
 		String reservationEmail = request.getParameter("reservationEmail");
-		System.out.println("pageController /myreservation , reservationEmail = "+reservationEmail);
 		
 		int count = 0;
 		count = myReservationService.getTotalReservationCountByEmail(reservationEmail);
