@@ -19,17 +19,15 @@ Mypage.prototype.init = function(){
 	Mypage.prototype.initLists();
 };
 
-Mypage.prototype.updateInit = function(res, reservationId){
+
+Mypage.prototype.moveList = function(res, reservationId){
 	Mypage.prototype.initSummary();
- 	Mypage.prototype.initUpdateLists(res, reservationId);
+ 	Mypage.prototype.moveUpdateSection(res, reservationId);
 };
 
 Mypage.prototype.initSummary = function(){
-	console.log("initSummary 실행");
-
 	let reservationEmail = Mypage.prototype.getParameters();
 	ajaxRequest.sendRequest("GET", "api/myreservationPage/"+reservationEmail, this.showSummary); 
-	
 };
 
 Mypage.prototype.getParameters = function(){
@@ -57,7 +55,6 @@ Mypage.prototype.showSummary = function(res){
 Mypage.prototype.initLists = function(){
 	let reservationEmail = this.getParameters();
 	
-	console.log("initLists 실행");
 	ajaxRequest.sendRequest("GET", "api/myreservationPage/"+reservationEmail, this.updateSections); 
 	this.addButtonClick();
 	this.addPopupButtionClick();
@@ -108,9 +105,7 @@ Mypage.prototype.updateSections = function(res){
 	}else{
 		sectionType.reservationType = "취소";
 		document.querySelector(".card.used.cancel").innerHTML += template.myreservation.emptySection(sectionType);
-
 	}
-	
 };
 
 // 2-2. 타입설정
@@ -171,7 +166,6 @@ Mypage.prototype.requestByReservationId = function(reservationid, popupType){
 Mypage.prototype.updateReservations = function(res, popupType){
 	if(popupType === "cancelPopup"){
 		document.querySelector(".popup_booking_wrapper").innerHTML = template.myreservation.cancelPopup(res.Myreservation);
-		console.log(document.querySelector(".popup_booking_wrapper"));
 	}else if(popupType === "reviewPopup"){
 		document.querySelector(".popup_booking_wrapper").innerHTML = template.myreservation.reviewPopup(res.Myreservation);
 	}
@@ -209,7 +203,7 @@ Mypage.prototype.addPopupButtionClick = function(){
 
 };
 
-// 4. 예약 취소 기능 추가
+// 4-1. 예약 취소 기능 추가
 Mypage.prototype.cancelReservation = function(reservationId){
 	console.log("cancel reservation함수");
 	
@@ -218,49 +212,58 @@ Mypage.prototype.cancelReservation = function(reservationId){
 	xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 	
 	xhr.addEventListener("load", function(){
-		this.updateInit(JSON.parse(xhr.responseText), reservationId) // 팝업창에 템플릿 삽입
+		this.moveList(JSON.parse(xhr.responseText), reservationId) // 팝업창에 템플릿 삽입
 		}.bind(this)
 	);
 	xhr.send();
 		
 };
 
-Mypage.prototype.initUpdateLists = function(res, reservationId){
+// 4-2. 예약 취소 후 리스트 업데이트
+Mypage.prototype.moveUpdateSection = function(res, reservationId){
 	let reservationEmail = this.getParameters();
-
-	console.log("initUpdateLists 실행");
-	console.log(res);
-	Mypage.prototype.updateNewSection(reservationId);
+	
+	// 예약 아이디를 받아서 해당 섹션을 삭제함
+	Mypage.prototype.deleteSection(reservationId); 
 	this.addButtonClick();
 	this.addPopupButtionClick();
-	
-	
 };
+
+// 4-3. 섹션 삭제
+Mypage.prototype.deleteSection = function(reservationId){
 	
-Mypage.prototype.updateNewSection = function(reservationId){
 	console.log(reservationId);
+
+	// 클릭한 섹션 삭제
+	document.querySelector('article[data-id="'+reservationId+'"]').remove();
 	
-	// 이용예정에 있는 섹션을 취소 섹션으로 옮김
-	let cardTemp = document.querySelector(".card_item");
-	console.log(cardTemp);
+	console.log(document.querySelector('.card.used.cancel .err'));
 	
-	if(document.querySelector(".card_item").id = reservationId){
-		document.querySelector(".card_item").remove();
-		console.log("삭제함");
+	if(document.querySelector('.card.used.cancel .err') != null){
+		document.querySelector('.card.used.cancel .err').remove();
 	}
 	
-	// cancel 섹션에 해당 아이디의 정보 템플릿을 추가함
-	ajaxRequest.sendRequest("GET", "api/myreservationPage/reservations/id?reservationId="+reservationId, this.addCancel); 
+	console.log("삭제함");
+	
+	// cancel 섹션에 추가할 해당 아이디의 정보를 불러옴
+	ajaxRequest.sendRequest("GET", "api/myreservationPage/reservations/id?reservationId="+reservationId, this.addSection); 
 };
 
-Mypage.prototype.addCancel= function(res) {
-	let addSections = res.response.Myreservation;
+// 4-4. 섹션 추가
+Mypage.prototype.addSection= function(res) {
+	let newReservation = res.response.Myreservation;
+
+	let cardSection = document.querySelector(".card.used.cancel");
+
+	console.log(document.querySelector(".card.used.cancel"));
 
 	// priceTypeName => 직관적으로 변경시킴
-	for(let i=0; i<addSections.ticketInfo.length; i++){
-		addSections.ticketInfo[i].priceTypeName = Mypage.prototype.getPriceType(addSections.ticketInfo[i].priceTypeName);
+	for(let i=0; i<newReservation.ticketInfo.length; i++){
+		newReservation.ticketInfo[i].priceTypeName = Mypage.prototype.getPriceType(newReservation.ticketInfo[i].priceTypeName);
 	};
-	document.querySelector(".card.used.cancel").innerHTML += template.myreservation.cancelSection(addSections);
+	
+	// 섹션 추가
+	cardSection.innerHTML += template.myreservation.cancelSection(newReservation);
 };
 
 

@@ -154,7 +154,7 @@
 </script>
 
 <script type="myreservation_template" id="confirmSection">
-  	<article class="card_item" data-id="{{reservationId}}>
+  	<article class="card_item" data-id="{{reservationId}}">
     	<a href="#" class="link_booking_details">
     		<div class="card_body">
     			<div class="left"></div>
@@ -290,7 +290,7 @@
  </script>
 
 <script type="myreservation_template" id="cancelSection">
-  <article class="card_item" data-id="{{reservationId}}>
+  <article class="card_item" data-id="{{reservationId}}">
     	<a href="#" class="link_booking_details">
     		<div class="card_body">
     			<div class="left"></div>
