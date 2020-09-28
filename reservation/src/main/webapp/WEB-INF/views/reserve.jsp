@@ -43,7 +43,9 @@
 		<div class="ct" data-display-id = "${displayInfoId}">
             <div class="ct_wrap" data-product-id = "${productId}">
                 <div class="top_title">
-                    <a href="javascript:history.back()" class="btn_back" title="이전 화면으로 이동"> <i class="fn fn-backward1"></i> </a>
+                	<a href="<%= request.getContextPath() %>/detail?displayInfoId=${displayInfoId}&productId=${productId}" class="btn_back" title="이전 화면으로 이동"> 
+                		<i class="fn fn-backward1"></i> 
+                	</a>
                     <!-- productDescription section -->
                 </div>
                 <div class="group_visual">
@@ -66,7 +68,7 @@
                         <div class="form_wrap">
                             <h3 class="out_tit">예매자 정보</h3>
                             <div class="agreement_nessasary help_txt"> <span class="spr_book ico_nessasary"></span> <span>필수입력</span> </div>
-                            	<form class="form_horizontal" name="resrvForm" action ="api/reservepage/addReservation" method="POST">
+                            	<form class="form_horizontal" name="resrvForm" action ="api/reserve/addReservation" method="POST">
                                 <div class="inline_form"> <label class="label" for="name"> <span class="spr_book ico_nessasary">필수</span> <span>예매자</span> </label>
                                     <div class="inline_control name_wrap"> 
                                     	<input type="text" name="name" id="name" class="text" placeholder="네이버" maxlength="17">
@@ -75,7 +77,7 @@
                                 </div>
                                 <div class="inline_form"> <label class="label" for="tel"> <span class="spr_book ico_nessasary">필수</span> <span>연락처</span> </label>
                                     <div class="inline_control tel_wrap">
-                                        <input type="tel" name="tel" id="tel" class="tel" value="" placeholder="휴대폰 입력 시 예매내역 문자발송">
+                                        <input type="tel" name="tel" id="tel" class="tel" value="" placeholder="010-1111-1111">
                                         <div class="warning_msg">형식이 틀렸거나 너무 짧아요</div>
                                     </div>
                                 </div>

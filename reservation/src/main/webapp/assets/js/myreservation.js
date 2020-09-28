@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", ()=> {
 	var mypage = new Mypage();
 	mypage.init();
@@ -27,7 +26,10 @@ Mypage.prototype.moveList = function(res, reservationId){
 
 Mypage.prototype.initSummary = function(){
 	let reservationEmail = Mypage.prototype.getParameters();
-	ajaxRequest.sendRequest("GET", "api/myreservationPage/"+reservationEmail, this.showSummary); 
+//	ajaxRequest.sendRequest("GET", "api/myreservationPage/"+reservationEmail, this.showSummary); 
+//	ajaxRequest.sendRequest("GET", "api/myreservationPage/reservations", this.showSummary); 
+	ajaxRequest.sendRequest("GET", "api/myreservationPage/reservations?reservationEmail="+reservationEmail, this.showSummary); 
+
 };
 
 Mypage.prototype.getParameters = function(){
@@ -55,7 +57,9 @@ Mypage.prototype.showSummary = function(res){
 Mypage.prototype.initLists = function(){
 	let reservationEmail = this.getParameters();
 	
-	ajaxRequest.sendRequest("GET", "api/myreservationPage/"+reservationEmail, this.updateSections); 
+//	ajaxRequest.sendRequest("GET", "api/myreservationPage/"+reservationEmail, this.updateSections); 
+	ajaxRequest.sendRequest("GET", "api/myreservationPage/reservations?reservationEmail="+reservationEmail, this.updateSections); 
+
 	this.addButtonClick();
 	this.addPopupButtionClick();
 };
@@ -265,5 +269,3 @@ Mypage.prototype.addSection= function(res) {
 	// 섹션 추가
 	cardSection.innerHTML += template.myreservation.cancelSection(newReservation);
 };
-
-

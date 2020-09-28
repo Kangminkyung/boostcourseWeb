@@ -14,6 +14,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +28,6 @@ import kr.or.connect.reservation.dto.MyReservation;
 import kr.or.connect.reservation.dto.TicketInfo;
 import kr.or.connect.reservation.service.MyReservationService;
 
-
 @RestController
 @RequestMapping(path = "/api/myreservationPage")
 public class MyreservationController {
@@ -40,13 +40,13 @@ public class MyreservationController {
 	}
 	
 	// 예약 상태 분류
-	private Status ClassifyList(MyReservation MyReservation) throws ParseException {
+	private Status ClassifyList(MyReservation myReservation) throws ParseException {
 		
-		if(MyReservation.getCancelFlag() == 1) {
+		if(myReservation.getCancelFlag() == 1) {
 			return Status.CANCEL;
 		}else {
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Date reservationDate = dateFormat.parse(MyReservation.getReservationDate());
+			Date reservationDate = dateFormat.parse(myReservation.getReservationDate());
 			
 			Date currentDate = new Date();
 			Calendar startDate = Calendar.getInstance();
@@ -66,14 +66,11 @@ public class MyreservationController {
 	}
 	
 	
-	@GetMapping(path = "/{reservationEmail:.+}")
-	public Map<String, Object> getMyListByEmail(@PathVariable("reservationEmail") String reservationEmail, HttpServletResponse response) throws ParseException, IOException{
-		
+	@GetMapping(path = "/reservations")
+	public Map<String, Object> getMyListByEmail(@RequestParam(value = "reservationEmail", required = false) String reservationEmail, HttpServletResponse response) throws ParseException, IOException{
+	
 		Map<String, Object> params = new HashMap<>();
-				
-		// 이메일 .com으로 받아오면 406 에러뜸
-		// co.kr로 예약하면 문제없이 잘 뜸
-				
+			
 		List<MyReservation> totalReservationList = myReservationService.getTotalReservationByEmail(reservationEmail);
 		List<MyReservation> canceledReservation = new ArrayList<>();
 		List<MyReservation> confirmedReservation = new ArrayList<>();
@@ -104,7 +101,6 @@ public class MyreservationController {
 		params.put("confirmedReservation", confirmedReservation);
 		params.put("usedReservation", usedReservation);
 
-		
 		return params;
 	}
 	

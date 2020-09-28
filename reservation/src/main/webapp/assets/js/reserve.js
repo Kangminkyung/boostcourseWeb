@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", ()=> {
 	var promotion = new Promotion();
 	promotion.initPromotion(); // 상단 이미지 타이틀 및 공연 상세정보
 
-
 	var price = new Price();
 	price.initPrices();  // 상품 가격
 	
@@ -93,7 +92,7 @@ Price.prototype.showPrices =function(productPrices){
 				"discountPrice": price.price * (100 - price.discountRate)/100,
 				"priceTypeName": price.priceTypeName,
 				"productId": price.productId,
-				"productPriceId": price.productPriceId,
+				"productPriceId": price.productPriceId
 	
 		}
 		return innerHtml + template.reserve.productPrices(priceInfo);
@@ -245,35 +244,26 @@ Reservation.prototype.checkReservationForm = function(){
 		let nameCheck = (/[[a-zA-Z가-힣]{1,17}/).test(reservationName.value);
 		let telCheck = (/01[01789]-\d{3,4}-\d{4}/).test(reservationTel.value);
 		let emailCheck = (/^[\w]\w+\@\w+\.\w+\.*\w*/).test(reservationEmail.value); 
-
-		console.log(reservationName.value + nameCheck);
-		console.log(reservationTel.value + telCheck);
-		console.log(reservationEmail.value + emailCheck);
 			
 		reservationName.parentElement.classList.add("name_wrap");
 		reservationTel.parentElement.classList.add("tel_wrap");
 		reservationEmail.parentElement.classList.add("email_wrap");
 		
 		if(nameCheck === false){
-			console.log("namefouce");
 			reservationName.focus();
 			reservationName.parentElement.classList.remove("name_wrap");
 		}
 		if(telCheck === false){
-			console.log("telfouce");
 			reservationTel.focus();
 			reservationTel.parentElement.classList.remove("tel_wrap");
 		}
 		if(emailCheck === false){
-			console.log("emailfouce");
 			reservationEmail.focus();
 			reservationEmail.parentElement.classList.remove("email_wrap");
 		}
 			
 		if(nameCheck && telCheck && emailCheck){
-			Reservation.prototype.makeReservation(reservationName.value, reservationTel.value, reservationEmail.value);
-			console.log(document.querySelector(".form_horizontal"));
-		
+			Reservation.prototype.makeReservation(reservationName.value, reservationTel.value, reservationEmail.value);		
 		}
 	}
 

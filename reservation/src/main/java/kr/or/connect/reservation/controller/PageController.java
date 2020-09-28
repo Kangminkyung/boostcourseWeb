@@ -12,18 +12,17 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.connect.reservation.service.MyReservationService;
-import kr.or.connect.reservation.service.ProductService;
 
 @Controller
 public class PageController {
 	
 	@Autowired
 	private MyReservationService myReservationService;
-	private ProductService productService;
 	
 	@GetMapping("/detail")
 	public ModelAndView productDetail(@RequestParam int displayInfoId, @RequestParam int productId) {
@@ -70,17 +69,17 @@ public class PageController {
 	
 		ModelAndView model = new ModelAndView();
 		String reservationEmail = request.getParameter("reservationEmail");
-		
 		int count = 0;
-		count = myReservationService.getTotalReservationCountByEmail(reservationEmail);
-		
+		count = myReservationService.getTotalReservationCountByEmail(reservationEmail);			
+			
 		// 아이디가 존재하지 않는 경우 로그인 페이지로 이동
 		if(count == 0) {
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>alert('아이디가 존재하지 않습니다!!'); location.href='http://localhost:8080/reservation/bookingloginPage';</script>"); 
-			out.flush();
-			model.setViewName("bookinglogin");
+			ModelAndView alert = new ModelAndView("/alert");
+
+			alert.addObject("message", "아이디가 존재하지 않습니다!!");
+			alert.addObject("url", "http://localhost:8080/reservation/bookingloginPage");
+			return alert;
+
 		}else {
 			// 아이디가 존재 할 경우 세션에 등록한다. 
 			if(session.getAttribute("email") == null) {
@@ -92,6 +91,14 @@ public class PageController {
 		model.setViewName("myreservation");
 		return model;
 		
+	}
+	
+	// 리뷰작성 페이지
+	@GetMapping(path = "/reviewWrite")
+	public ModelAndView reviewWritePage() {
+		ModelAndView model = new ModelAndView();
+		model.setViewName("reviewWrite");
+		return model;
 	}
 	
 }

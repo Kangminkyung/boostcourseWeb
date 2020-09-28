@@ -39,7 +39,7 @@ public class MyReservationDao {
 	public List<MyReservation> selectTotalReservationByEmail(String reservationEmail) {
 		Map<String, String> params = new HashMap<>();
 		List<MyReservation> myList = null;
-		
+
 		params.put("reservationEmail", reservationEmail);
 		myList = jdbc.query(SELECT_TOTAL_RESERVATION_BY_EMAIL, params, myReservationMapper);	
 		

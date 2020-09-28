@@ -14,7 +14,6 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import kr.or.connect.reservation.interceptor.LoginInterceptor;
 import kr.or.connect.reservation.resolver.ArgumentResolver;
 
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -59,10 +58,10 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter{
 		return resolver;
 	}
 	
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new LoginInterceptor());
-	}
+//	@Override
+//	public void addInterceptors(InterceptorRegistry registry) {
+//		registry.addInterceptor(new LoginInterceptor());
+//	}
 
 	
 	@Override
