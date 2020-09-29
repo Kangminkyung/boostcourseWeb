@@ -5,6 +5,7 @@ import java.util.List;
 public class MyReservation {
 	private int ticketPrice;  // 티켓 총 가격
 	private int ticketCount; // 총 티켓 수
+	private int displayInfoId; // display_info
 	private String placeName = ""; // display_info
 	private String placeLot = ""; // display_info
 	private String placeStreet = ""; // display_info
@@ -14,7 +15,6 @@ public class MyReservation {
 	private int cancelFlag; // reservation_info
 	private String reservationDate; // reservation_info
 	private List<TicketInfo> ticketInfo; // product_price + reservation_info_price
-	
 	public int getTicketPrice() {
 		return ticketPrice;
 	}
@@ -26,6 +26,12 @@ public class MyReservation {
 	}
 	public void setTicketCount(int ticketCount) {
 		this.ticketCount = ticketCount;
+	}
+	public int getDisplayInfoId() {
+		return displayInfoId;
+	}
+	public void setDisplayInfoId(int displayInfoId) {
+		this.displayInfoId = displayInfoId;
 	}
 	public String getPlaceName() {
 		return placeName;
@@ -81,15 +87,16 @@ public class MyReservation {
 	public void setTicketInfo(List<TicketInfo> ticketInfo) {
 		this.ticketInfo = ticketInfo;
 	}
+	
 	@Override
 	public String toString() {
-		return "MyReservation [ticketPrice=" + ticketPrice + ", ticketCount=" + ticketCount + ", placeName=" + placeName
-				+ ", placeLot=" + placeLot + ", placeStreet=" + placeStreet + ", productId=" + productId
-				+ ", description=" + description + ", reservationId=" + reservationId + ", cancelFlag=" + cancelFlag
-				+ ", reservationDate=" + reservationDate + ", ticketInfo=" + ticketInfo + "]";
+		return "MyReservation [ticketPrice=" + ticketPrice + ", ticketCount=" + ticketCount + ", displayInfoId="
+				+ displayInfoId + ", placeName=" + placeName + ", placeLot=" + placeLot + ", placeStreet=" + placeStreet
+				+ ", productId=" + productId + ", description=" + description + ", reservationId=" + reservationId
+				+ ", cancelFlag=" + cancelFlag + ", reservationDate=" + reservationDate + ", ticketInfo=" + ticketInfo
+				+ "]";
 	}
 	
-	
-	
+
 	
 }

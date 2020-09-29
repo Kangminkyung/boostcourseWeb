@@ -31,6 +31,9 @@ let handlebars = {
 	// login
 	showWarningMsg: undefined,
 	
+	// reviewWrite
+	titleDescription : undefined,
+	
 	precompile(registerTemplate, id, data) {
 		
 		if (registerTemplate === undefined) {
@@ -120,5 +123,11 @@ let template = {
 		showWarningMsg(data){
 			return handlebars.precompile(handlebars.showWarningMsg, "#warning_msg", data);
 		}
-	}
+	},
+	
+	reviewWrite: {
+		titleDescription(data){
+			return handlebars.precompile(handlebars.titleDescription, "#titleDescription", data);
+		},
+	},
 }

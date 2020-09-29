@@ -394,7 +394,6 @@
 	<div class="dimm_dark" style="display: block"></div>
 	<div class="popup_booking refund">
 		<h1 class="pop_tit">
-			<span>서비스명/상품명</span> 
 			<span>{{description}}</span>
 			<small class="sm">예약일: {{reservationDate}}</small>
 			<small class="sm">내역: 총 {{ticketCount}}장</small>
@@ -409,8 +408,9 @@
 				<a href="#" class="btn_bottom no_btn"><span>아니오</span></a>
 			</div>
 			<div class="btn_green" reservationId ={{reservationId}} productId = {{productId}}>
-				<a href="#" class="btn_bottom yes_btn"><span>예</span></a>
-			</div>
+				<a href="<%=request.getContextPath()%>/reviewWrite?displayInfoId={{displayInfoId}}&productId={{productId}}" class="btn_bottom yes_btn"><span>예</span></a>	
+
+</div>
 		</div>
 		<!-- 닫기 -->
 		<a href="#" class="popup_btn_close" title="close"> 

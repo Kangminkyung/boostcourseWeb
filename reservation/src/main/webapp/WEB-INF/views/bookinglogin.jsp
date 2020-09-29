@@ -75,7 +75,7 @@
                </ul>
                <p class="dsc_footer" translate="CM-FOOTER_DESC">네이버(주)는 통신판매의 당사자가 아니며, 상품의정보, 거래조건, 이용 및 환불 등과 관련한 의무와 책임은 각 회원에게 있습니다.</p>
                <dl class="box_vcard">
-                  <dt class="tit_dt"> <a href="https://m.booking.naver.com/#" class="lnk_naver"   title="펼쳐보기"> <span translate="CM-NAVER_INC">(주)네이버 사업자정보</span> <i class="fn fn-down2" aria-hidden="true" ></i> </a> </dt>
+                  <dt class="tit_dt"> <a href="https://m.booking.naver.com/" class="lnk_naver"   title="펼쳐보기"> <span translate="CM-NAVER_INC">(주)네이버 사업자정보</span> <i class="fn fn-down2" aria-hidden="true" ></i> </a> </dt>
                   <!----> 
                </dl>
                <ul class="lst_link">

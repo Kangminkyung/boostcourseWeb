@@ -8,6 +8,7 @@ public class MyReservationDaoSqls {
 	public static final String SELECT_TOTAL_RESERVATION_BY_EMAIL = 
 			"SELECT SUM(D.COUNT * E.PRICE) AS TICKETPRICE," + 
 			"	SUM(D.COUNT) AS TICKETCOUNT, " + 
+			"	C.ID AS DISPLAYINFOID, " +		
 			"	C.PLACE_NAME AS PLACENAME, " + 
 			"	C.PLACE_LOT AS PLACELOT, " + 
 			"	C.PLACE_STREET AS PLACESTREET, " + 
@@ -44,6 +45,7 @@ public class MyReservationDaoSqls {
 	public static final String SELECT_MYLIST_BY_RESERVATIOM_ID = 
 			"SELECT SUM(D.COUNT * E.PRICE) AS TICKETPRICE, " + 
 			"	SUM(D.COUNT) AS TICKETCOUNT, " + 
+			"	C.ID AS DISPLAYINFOID, " +		
 			"	C.PLACE_NAME AS PLACENAME, " + 
 			"	C.PLACE_LOT AS PLACELOT, " + 
 			"	C.PLACE_STREET AS PLACESTREET, " + 

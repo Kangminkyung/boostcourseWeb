@@ -26,9 +26,7 @@ Mypage.prototype.moveList = function(res, reservationId){
 
 Mypage.prototype.initSummary = function(){
 	let reservationEmail = Mypage.prototype.getParameters();
-//	ajaxRequest.sendRequest("GET", "api/myreservationPage/"+reservationEmail, this.showSummary); 
-//	ajaxRequest.sendRequest("GET", "api/myreservationPage/reservations", this.showSummary); 
-	ajaxRequest.sendRequest("GET", "api/myreservationPage/reservations?reservationEmail="+reservationEmail, this.showSummary); 
+	ajaxRequest.sendRequest("GET", "api/reserve/reservations?reservationEmail="+reservationEmail, this.showSummary); 
 
 };
 
@@ -57,9 +55,9 @@ Mypage.prototype.showSummary = function(res){
 Mypage.prototype.initLists = function(){
 	let reservationEmail = this.getParameters();
 	
-//	ajaxRequest.sendRequest("GET", "api/myreservationPage/"+reservationEmail, this.updateSections); 
-	ajaxRequest.sendRequest("GET", "api/myreservationPage/reservations?reservationEmail="+reservationEmail, this.updateSections); 
+	ajaxRequest.sendRequest("GET", "api/reserve/reservations?reservationEmail="+reservationEmail, this.updateSections); 
 
+	
 	this.addButtonClick();
 	this.addPopupButtionClick();
 };
@@ -156,7 +154,8 @@ Mypage.prototype.addButtonClick = function(){
 Mypage.prototype.requestByReservationId = function(reservationid, popupType){		
 	// 파라미터가 있는 경우 ajax
 	let xhr = new XMLHttpRequest();
-	xhr.open("GET", "api/myreservationPage/reservations/id?reservationId="+reservationid, true);
+	xhr.open("GET", "api/reserve/reservations/id?reservationId="+reservationid, true);
+	
 	xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 	
 	xhr.addEventListener("load", function(){
@@ -212,7 +211,7 @@ Mypage.prototype.cancelReservation = function(reservationId){
 	console.log("cancel reservation함수");
 	
 	let xhr = new XMLHttpRequest();
-	xhr.open("PUT", "api/myreservationPage/reservations?reservationId="+reservationId, true);
+	xhr.open("PUT", "api/reserve/reservations?reservationId="+reservationId, true);
 	xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 	
 	xhr.addEventListener("load", function(){
@@ -246,11 +245,9 @@ Mypage.prototype.deleteSection = function(reservationId){
 	if(document.querySelector('.card.used.cancel .err') != null){
 		document.querySelector('.card.used.cancel .err').remove();
 	}
-	
-	console.log("삭제함");
-	
+		
 	// cancel 섹션에 추가할 해당 아이디의 정보를 불러옴
-	ajaxRequest.sendRequest("GET", "api/myreservationPage/reservations/id?reservationId="+reservationId, this.addSection); 
+	ajaxRequest.sendRequest("GET", "api/reserve/reservations/id?reservationId="+reservationId, this.addSection); 
 };
 
 // 4-4. 섹션 추가
@@ -258,8 +255,6 @@ Mypage.prototype.addSection= function(res) {
 	let newReservation = res.response.Myreservation;
 
 	let cardSection = document.querySelector(".card.used.cancel");
-
-	console.log(document.querySelector(".card.used.cancel"));
 
 	// priceTypeName => 직관적으로 변경시킴
 	for(let i=0; i<newReservation.ticketInfo.length; i++){

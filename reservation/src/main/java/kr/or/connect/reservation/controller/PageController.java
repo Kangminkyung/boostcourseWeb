@@ -65,7 +65,7 @@ public class PageController {
 	
 	// 로그인 -> 나의 예매 페이지 
 	@GetMapping(path = "/myreservation")
-	public ModelAndView myreservationPage(HttpServletResponse response, HttpServletRequest request,HttpSession session) throws IOException {
+	public ModelAndView myreservationPage(HttpServletResponse response, HttpServletRequest request, HttpSession session) throws IOException {
 	
 		ModelAndView model = new ModelAndView();
 		String reservationEmail = request.getParameter("reservationEmail");
@@ -95,10 +95,19 @@ public class PageController {
 	
 	// 리뷰작성 페이지
 	@GetMapping(path = "/reviewWrite")
-	public ModelAndView reviewWritePage() {
-		ModelAndView model = new ModelAndView();
-		model.setViewName("reviewWrite");
-		return model;
+	public ModelAndView reviewWritePage(@RequestParam int productId, HttpServletRequest request, HttpSession session) {
+		ModelAndView reviewWrite = new ModelAndView("/reviewWrite");
+		
+		String reservationEmail = request.getParameter("reservationEmail");
+		String email  = (String)session.getAttribute("email"); 
+		reviewWrite.addObject("productId", productId);
+
+		// 로그인 여부 확인
+		if(email == null) {
+			session.setAttribute("email", reservationEmail);
+		}
+		return reviewWrite;
+		
 	}
 	
 }
