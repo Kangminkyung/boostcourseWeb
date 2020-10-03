@@ -408,7 +408,7 @@
 				<a href="#" class="btn_bottom no_btn"><span>아니오</span></a>
 			</div>
 			<div class="btn_green" reservationId ={{reservationId}} productId = {{productId}}>
-				<a href="<%=request.getContextPath()%>/reviewWrite?displayInfoId={{displayInfoId}}&productId={{productId}}" class="btn_bottom yes_btn"><span>예</span></a>	
+				<a href="<%=request.getContextPath()%>/reviewWrite?reservationId={{reservationId}}&displayInfoId={{displayInfoId}}&productId={{productId}}" class="btn_bottom yes_btn"><span>예</span></a>	
 
 </div>
 		</div>

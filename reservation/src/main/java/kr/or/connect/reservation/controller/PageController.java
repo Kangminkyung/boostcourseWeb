@@ -1,7 +1,6 @@
 package kr.or.connect.reservation.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -12,7 +11,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -95,11 +93,12 @@ public class PageController {
 	
 	// 리뷰작성 페이지
 	@GetMapping(path = "/reviewWrite")
-	public ModelAndView reviewWritePage(@RequestParam int productId, HttpServletRequest request, HttpSession session) {
+	public ModelAndView reviewWritePage(@RequestParam int reservationId, @RequestParam int productId, HttpServletRequest request, HttpSession session) {
 		ModelAndView reviewWrite = new ModelAndView("/reviewWrite");
 		
 		String reservationEmail = request.getParameter("reservationEmail");
 		String email  = (String)session.getAttribute("email"); 
+		reviewWrite.addObject("reservationId", reservationId);
 		reviewWrite.addObject("productId", productId);
 
 		// 로그인 여부 확인
