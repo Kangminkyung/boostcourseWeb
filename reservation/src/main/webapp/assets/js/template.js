@@ -33,6 +33,7 @@ let handlebars = {
 	
 	// reviewWrite
 	titleDescription : undefined,
+	hiddenSection: undefined,
 	
 	precompile(registerTemplate, id, data) {
 		
@@ -129,5 +130,9 @@ let template = {
 		titleDescription(data){
 			return handlebars.precompile(handlebars.titleDescription, "#titleDescription", data);
 		},
+		hiddenSection(data){
+			console.log(data);
+			return handlebars.precompile(handlebars.hiddenSection, "#hiddenSection", data);
+		}
 	},
 }

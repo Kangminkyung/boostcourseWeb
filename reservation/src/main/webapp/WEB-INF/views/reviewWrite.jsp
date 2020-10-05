@@ -33,7 +33,7 @@
 					<!-- title -->
 				</div>
 				
-				<form action="" method = "post" id="reviewForm " enctype="multipart/form-data" onsubmit="return false;">
+				<form action="" method = "post" id="reviewForm" enctype="multipart/form-data" onsubmit="return false;">
 					<!-- 리뷰 별점 -->
 					<div class="write_act">
 						<p class="title_star">별점과 이용경험을 남겨주세요.</p>
@@ -86,8 +86,8 @@
 												accept="image/jpg,image/png" 
 												multiple>
 							<div class="guide_review">
-								<span>0</span>/400
-								<span>(최소5자이상)</span>
+								<span class="textCount">0</span>/<span class="textLimit">400</span>
+								<span>(최소<span class="textLower">5</span>자이상)</span>
 							</div>
 						</div>
 
@@ -109,7 +109,15 @@
 	
 					</div>
 					<!-- //리뷰 작성 푸터 -->
-	
+					
+					<!-- 사용자 정보 추가 -->
+					<div id="hiddenSection">
+						<input type="hidden" name="reservationId" id="reservationId" value=""/>
+						<input type="hidden" name="reservationEmail" id="reservationEmail" value="${sessionScope.email}"/>
+						<input type="hidden" name="productId" id="productId" value=""/>
+						<input type="hidden" name="point" id="point" value=""/>
+						<input type="hidden" name="reviewContent" id="reviewContent" value=""/>
+					</div>
 					<!-- 리뷰 등록 -->
 					<div class="box_bk_btn">
 						<button class="bk_btn"><span class="btn_txt">리뷰 등록</span></button>
@@ -134,5 +142,6 @@
 <script type="reviewWrite_template" id="titleDescription">
 	<h2><span class="title">{{productDescription}}</span></h2>
 </script>
+
 
 </html>
