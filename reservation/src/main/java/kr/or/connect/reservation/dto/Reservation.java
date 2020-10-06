@@ -13,8 +13,8 @@ public class Reservation {
 	private String reservationEmail = "";
 	private String reservationDate = "";
 	private int cancelFlag;
-	private final String createDate = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss").format(LocalDateTime.now());
-	private final String modifyDate = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss").format(LocalDateTime.now());
+	private final String createDate = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now());
+	private final String modifyDate = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now());
 	private List<ReservationPrice> reservationPrices;
 	
 	public int getReservationInfoId() {

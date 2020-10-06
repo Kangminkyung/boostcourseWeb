@@ -12,7 +12,7 @@ public class Comment {
 	private int reservationInfoId; // 예약 id = reservation_info.id
 	private double score; //평점
 	private String comment; // 한줄평
-	private LocalDateTime createDate; // 생성일 
+	private LocalDateTime createDate ; // 생성일 
 	private String modifyDate; // 수정일 
 	
 	// CommentImage 정보 담기

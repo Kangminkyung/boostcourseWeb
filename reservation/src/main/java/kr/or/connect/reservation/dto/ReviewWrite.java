@@ -12,8 +12,8 @@ public class ReviewWrite {
 	private String saveFileName;
 	private String contentType;
 	private int deleteFlag;
-	private final String createDate = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss").format(LocalDateTime.now());
-	private final String modifyDate = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss").format(LocalDateTime.now());
+	private final String createDate = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now());
+	private final String modifyDate = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now());
 	public int getReservationId() {
 		return reservationId;
 	}

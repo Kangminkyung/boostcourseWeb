@@ -1,13 +1,16 @@
 package kr.or.connect.reservation.dto;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class FileInfo {
 	private int id;
 	private String fileName;
 	private String saveFileName;
 	private String contentType;
 	private int deleteFlag;
-	private String createDate;
-	private String modifyDate;
+	private String createDate = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now());;
+	private String modifyDate = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now());;
 	
 	public int getId() {
 		return id;
