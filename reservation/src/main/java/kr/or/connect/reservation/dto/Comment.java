@@ -25,6 +25,8 @@ public class Comment {
 	private String reservationEmail; // 예약자 이메일
 	private String reservationDate; // 예약일 
 	
+	// reservation_user_comment_image
+	private int fileId; // 파일아이디
 	
 	public String getDescription() {
 		return description;
@@ -148,12 +150,23 @@ public class Comment {
 	}
 
 	
+	public int getFileId() {
+		return fileId;
+	}
+
+	public void setFileId(int fileId) {
+		this.fileId = fileId;
+	}
+
 	@Override
 	public String toString() {
-		return "Comment [description=" +description+ " comment=" + comment + ", commentId=" + commentId + ", displayInfoId= " + displayInfoId +", commentImages=" + commentImages
-			+ ", createDate=" + createDate + ", modifyDate=" + modifyDate + ", imageCount=" +imageCount+ ", productId=" + productId
-			+ ", reservationDate=" + reservationDate + ", reservationEmail=" + reservationEmail + ", reservationInfoId="
-			+ reservationInfoId + ", reservationName=" + reservationName + ", reservationTelephone="
-			+ reservationTel + ", score=" + score + "]";
+		return "Comment [description=" + description + ", commentId=" + commentId + ", productId=" + productId
+				+ ", displayInfoId=" + displayInfoId + ", reservationInfoId=" + reservationInfoId + ", score=" + score
+				+ ", comment=" + comment + ", createDate=" + createDate + ", modifyDate=" + modifyDate + ", imageCount="
+				+ imageCount + ", commentImages=" + commentImages + ", reservationName=" + reservationName
+				+ ", reservationTel=" + reservationTel + ", reservationEmail=" + reservationEmail + ", reservationDate="
+				+ reservationDate + ", fileId=" + fileId + "]";
 	}
+
+	
 }

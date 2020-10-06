@@ -42,7 +42,7 @@ Promotion.prototype.showProductDetail = function(xhr){
 Promotion.prototype.showTitleImages = function(res){
 	let productImages = res.productImages;
 	let productDescription = res.displayInfo.productDescription;
-	
+
 	let one = {productImage : productImages[0], productDescription};
 	let second = {productImage : productImages[1], productDescription};
 
@@ -191,6 +191,7 @@ Reservation.prototype.getAverageScore = function(averageScore){
 
 // 5-2. 한줄평
 Reservation.prototype.getComments = function(comments){		
+	
 	let commentsHtml = comments.slice(0,3).reduce((innerHtml, comment) => {
 		comment.score = comment.score.toFixed(1);
 		return innerHtml + template.detail.comment(comment);

@@ -6,14 +6,13 @@ public class ProductImage {
 	private int productId; // 상품 id
 	private int productImageId; // 상품 이미지 id
 	private String type; // 이미지 타입 ma, th, et
-	private int fileInfoId; // 파일 id
+	private int fileId; // 파일 id
 	private String fileName; // 파일 이름
 	private String productSaveFileName; // 파일 저장 위치 이름
 	private String contentType; // 파일 확장자
 	private boolean deleteFlag; //삭제 여부
 	private LocalDateTime createDate; // 생성일 
 	private LocalDateTime modifyDate; // 수정일 
-	
 	public int getProductId() {
 		return productId;
 	}
@@ -32,11 +31,11 @@ public class ProductImage {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public int getFileInfoId() {
-		return fileInfoId;
+	public int getFileId() {
+		return fileId;
 	}
-	public void setFileInfoId(int fileInfoId) {
-		this.fileInfoId = fileInfoId;
+	public void setFileId(int fileId) {
+		this.fileId = fileId;
 	}
 	public String getFileName() {
 		return fileName;
@@ -74,12 +73,13 @@ public class ProductImage {
 	public void setModifyDate(LocalDateTime modifyDate) {
 		this.modifyDate = modifyDate;
 	}
-
 	@Override
 	public String toString() {
 		return "ProductImage [productId=" + productId + ", productImageId=" + productImageId + ", type=" + type
-			+ ", fileInfoId=" + fileInfoId + ", fileName=" + fileName + ", productSaveFileName=" + productSaveFileName
-			+ ", contentType=" + contentType + ", deleteFlag=" + deleteFlag + ", createDate=" + createDate
-			+ ", modifyDate=" + modifyDate + "]";
+				+ ", fileId=" + fileId + ", fileName=" + fileName + ", productSaveFileName=" + productSaveFileName
+				+ ", contentType=" + contentType + ", deleteFlag=" + deleteFlag + ", createDate=" + createDate
+				+ ", modifyDate=" + modifyDate + "]";
 	}
+	
+	
 }

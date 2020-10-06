@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,7 +83,11 @@ public class FileController {
 		return reviews;
 	}
 
-	/*
+	@GetMapping("/downloadImage")
+	public void download(HttpServletRequest request,HttpServletResponse response) {
+		int fileId = Integer.parseInt(request.getParameter("FileId"));
+	}
+/*	
 	@GetMapping("/download")
 	public void download(HttpServletResponse response) {
 
