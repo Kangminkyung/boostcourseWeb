@@ -33,7 +33,7 @@
 					<!-- title -->
 				</div>
 				
-				<form action="" method = "post" id="reviewForm" enctype="multipart/form-data" onsubmit="return false;">
+				<form action ="uploadReview"  method = "post" id="reviewForm" enctype="multipart/form-data" onsubmit="return false;">
 					<!-- 리뷰 별점 -->
 					<div class="write_act">
 						<p class="title_star">별점과 이용경험을 남겨주세요.</p>
@@ -115,7 +115,7 @@
 						<input type="hidden" name="reservationId" id="reservationId" value=""/>
 						<input type="hidden" name="reservationEmail" id="reservationEmail" value="${sessionScope.email}"/>
 						<input type="hidden" name="productId" id="productId" value=""/>
-						<input type="hidden" name="point" id="point" value=""/>
+						<input type="hidden" name="score" id="score" value=""/>
 						<input type="hidden" name="reviewContent" id="reviewContent" value=""/>
 					</div>
 					<!-- 리뷰 등록 -->

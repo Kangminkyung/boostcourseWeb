@@ -17,8 +17,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import kr.or.connect.reservation.resolver.ArgumentResolver;
 import kr.or.connect.reservation.interceptor.LoginInterceptor;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
-
-
+import org.springframework.web.multipart.MultipartResolver;
 
 //WebMvcContextConfiguration는 DispatcherServlet가 읽어들일 설정
 @Configuration
@@ -70,5 +69,10 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter{
 		argumentResolvers.add(new ArgumentResolver());
 	}
 
-	
+	@Bean
+	public MultipartResolver multipartResolver() {
+		org.springframework.web.multipart.commons.CommonsMultipartResolver multipartResolver = new org.springframework.web.multipart.commons.CommonsMultipartResolver();
+		multipartResolver.setMaxUploadSize(10485760); // 최대10MB파일까지 저장가능지정
+		return multipartResolver;
+	}	
 }

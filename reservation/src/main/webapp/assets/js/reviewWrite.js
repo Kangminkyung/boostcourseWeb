@@ -13,7 +13,7 @@ function Review(){
 
 Review.prototype.init = function(){
 	Review.prototype.initTitle(); // 타이틀 
-	Review.prototype.initRatingPoint(); // 별점
+	Review.prototype.initRatingScore(); // 별점
 	Review.prototype.initTextarea();// 텍스트
 	Review.prototype.initFile();// 파일
 	
@@ -64,7 +64,7 @@ Review.prototype.showTitle = function(res){
 };
 
 /* 별점 */
-Review.prototype.initRatingPoint = function(){
+Review.prototype.initRatingScore = function(){
 	let reviewRating = document.querySelector(".review_rating");
 	let rating = 0; // rating 배열 순서 체크
 	let visited = [];
@@ -201,13 +201,14 @@ Review.prototype.updateForm = function(){
     document.querySelector("#reservationId").value = Review.prototype.getReservationId();
     document.querySelector("#productId").value = Review.prototype.getProductId();
 
-    document.querySelector("#point").value = document.querySelector(".star_rank").innerText;
+    document.querySelector("#score").value = document.querySelector(".star_rank").innerText;
     document.querySelector("#reviewContent").value = Review.prototype.getReviewContent();
 
-    if(Review.prototype.checkForm()){ // true이면 폼전송
-    	alert("리뷰등록중");
-    	document.querySelector("#reviewForm").onsubmit();
+    document.querySelector("#reviewForm").onsubmit = () => {
+    	console.log(Review.prototype.checkForm());
+    	return Review.prototype.checkForm(); // onsubmit= true일때만 폼 전송
     }
+    
 };
 
 Review.prototype.checkForm = function(){
