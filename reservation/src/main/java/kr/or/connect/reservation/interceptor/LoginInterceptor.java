@@ -1,4 +1,6 @@
 package kr.or.connect.reservation.interceptor;
+import java.text.SimpleDateFormat;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,18 +12,29 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+	private String getDataFormatTime(long currentTime) {
+		SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분 ss초");
+		return timeFormat.format( currentTime);
+	}
+	
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-//		System.out.println(handler.toString() + " 가 종료되었습니다.  " + modelAndView.getViewName() + "을 view로 사용합니다.");
-		logger.debug("{} 가종료되었습니다. {} 를 view로 사용합니다.", handler.toString(), modelAndView.getViewName());
+		
+		if(modelAndView != null) {
+			logger.debug("[postHandle] ==> 호출된 뷰:{}", modelAndView.getViewName());
+		}
+		
+		logger.debug("[postHandle] 수행:{}, 요청URL:{}, 시간:{}, ip주소:{}", 
+				handler.toString(),request.getRequestURL(), getDataFormatTime(System.currentTimeMillis()), request.getRemoteAddr());
 	}
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-//		System.out.println(handler.toString() + " 를 호출했습니다.");
-		logger.debug("{} 를 호출했습니다.", handler.toString());
+		
+		logger.debug("[preHandle] 수행:{}, 요청URL:{}, 시간:{}, ip주소:{}", 
+				handler.toString(),request.getRequestURL(), getDataFormatTime(System.currentTimeMillis()), request.getRemoteAddr());
 		return true;
 	}
 
