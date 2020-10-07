@@ -45,7 +45,7 @@ public class CommentDao {
 			List<CommentImage> imageList = getImages(comment.getCommentId());
 			
 			for(CommentImage image : imageList) {
-				String newName = "assets/";
+				String newName = "/tmp/";
 				newName += image.getSaveFileName();
 				image.setSaveFileName(newName);
 			}

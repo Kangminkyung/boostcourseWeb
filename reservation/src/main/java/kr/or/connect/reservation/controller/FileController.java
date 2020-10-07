@@ -39,8 +39,6 @@ public class FileController {
 		String reservationEmail = formData.getParameter("reservationEmail");
 		directURL += reservationEmail;
 		
-
-		
         try(
                 // 윈도우일 경우
                 FileOutputStream fos = new FileOutputStream("c:/tmp/" + fileName);
@@ -74,7 +72,7 @@ public class FileController {
 		reviews.setComment(formData.getParameter("comment"));
 		
 		reviews.setFileName(uuid + file.getOriginalFilename());
-		reviews.setSaveFileName("image/"+ uuid + file.getOriginalFilename());
+		reviews.setSaveFileName("/reviewImage/"+ uuid + file.getOriginalFilename());
 		reviews.setContentType(file.getContentType());
 		
 		
@@ -92,15 +90,15 @@ public class FileController {
 		return reviews;
 	}
 
-	@GetMapping(path ="/downloadImage.do")
-	public void download(@RequestParam("FileId") String FileId, HttpServletRequest request,HttpServletResponse response) {
-		int fileId = Integer.parseInt(request.getParameter("FileId"));
-		
+	@RequestMapping(value ="/downloadImage.do")
+	public void download(@RequestParam("fileId") String fileId, HttpServletRequest request,HttpServletResponse response) {
+	//	int fileinfoId = Integer.parseInt(request.getParameter("fileId"));
+		int fileinfoId = Integer.parseInt(fileId);
 		System.out.println("파일 다운로드 컨트롤러");
-		System.out.println(fileId);
-		System.out.println(fileId == 0);
+		System.out.println(fileinfoId);
+		System.out.println(fileinfoId == 0);
 		
-		if(fileId == 0) { 
+		if(fileinfoId == 0) { 
 			return;
 		}
 /*		
