@@ -4,14 +4,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.or.connect.reservation.dao.CommentDao;
 import kr.or.connect.reservation.dao.ReservationDao;
 import kr.or.connect.reservation.dao.ReviewWriteDao;
+import kr.or.connect.reservation.dto.FileInfo;
 import kr.or.connect.reservation.dto.ReviewWrite;
 
 @Service
 public class ReviewWriteService {
 	@Autowired
 	private ReviewWriteDao reviewWriteDao;
+	
+	@Autowired
+	private CommentDao commentDao;
 
 	@Transactional(readOnly = false)
 	public void addReviewData(ReviewWrite reviews, boolean isEmpty) {
@@ -30,6 +35,10 @@ public class ReviewWriteService {
 					reviewWriteDao.insertUserComment(reviews),
 					reviewWriteDao.insertFileImage(reviews));
 		}
+	}
+
+	public String selectReviewImageFile(int id) {
+		return commentDao.selectReviewImageFile(id);
 	}
 
 }

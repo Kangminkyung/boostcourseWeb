@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.connect.reservation.dto.Comment;
 import kr.or.connect.reservation.dto.CommentImage;
+import kr.or.connect.reservation.dto.FileInfo;
 
 import static kr.or.connect.reservation.dao.CommentDaoSqls.*;
 
@@ -23,6 +24,7 @@ public class CommentDao {
 	private NamedParameterJdbcTemplate jdbc;
 	private RowMapper<Comment> commentMapper = BeanPropertyRowMapper.newInstance(Comment.class);
 	private RowMapper<CommentImage> commentImageMapper = BeanPropertyRowMapper.newInstance(CommentImage.class);
+	private RowMapper<FileInfo> fileInfoMapper = BeanPropertyRowMapper.newInstance(FileInfo.class);
 
 	public CommentDao(DataSource dataSource) {
 		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
@@ -45,8 +47,8 @@ public class CommentDao {
 			List<CommentImage> imageList = getImages(comment.getCommentId());
 			
 			for(CommentImage image : imageList) {
-				String newName = "/tmp/";
-				newName += image.getSaveFileName();
+				String newName = "/tmp/reviewImage/";
+				newName += image.getFileName();
 				image.setSaveFileName(newName);
 			}
 		
@@ -82,5 +84,11 @@ public class CommentDao {
 		map.put("commentId", commentId);
 		return jdbc.queryForObject(GET_COMMENT_IMAGE_COUNT, map, Integer.class);
 
+	}
+
+	public String selectReviewImageFile(int id) {
+		Map<String, Integer> map = new HashMap<>();
+		map.put("id", id);
+		return jdbc.queryForObject(SELECT_REVIEW_IMAGE_FILE, map, String.class);
 	}
 }

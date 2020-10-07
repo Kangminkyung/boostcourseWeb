@@ -66,8 +66,8 @@ public class ProductService {
 
 		// displayInfo 이미지 경로를 변경함 (displayInfoSaveFileName)
 		for(DisplayInfoImage image : displayInfoImageList) {
-			String newName = "/tmp/";
-			newName += image.getDisplayInfoSaveFileName();
+			String newName = "/tmp/img_map/";
+			newName += image.getFileName();
 			image.setDisplayInfoSaveFileName(newName);
 		}
 		
@@ -81,8 +81,8 @@ public class ProductService {
 
 		// product 이미지 경로를 변경함(productSaveFileName)
 		for(ProductImage image : productImages) {
-			String newName = "/tmp/";
-			newName += image.getProductSaveFileName();
+			String newName = "/tmp/img/";
+			newName += image.getFileName();
 			image.setProductSaveFileName(newName);
 		}
 		

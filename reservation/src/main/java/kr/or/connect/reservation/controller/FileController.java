@@ -3,8 +3,10 @@ package kr.or.connect.reservation.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import kr.or.connect.reservation.dto.FileInfo;
 import kr.or.connect.reservation.dto.ReviewWrite;
 import kr.or.connect.reservation.service.ReviewWriteService;
 
@@ -28,7 +31,7 @@ public class FileController {
 
 	@Autowired
 	private ReviewWriteService reviewWriteService;
-	
+
 	@PostMapping("/uploadReview")
 	public String upload(MultipartHttpServletRequest formData) {
 		
@@ -74,41 +77,47 @@ public class FileController {
 		reviews.setFileName(uuid + file.getOriginalFilename());
 		reviews.setSaveFileName("/reviewImage/"+ uuid + file.getOriginalFilename());
 		reviews.setContentType(file.getContentType());
-		
-		
-		System.out.println("---------getReviewData--------------");
-		System.out.println("reservationId: "+ reviews.getReservationId());
-		System.out.println("productId: "+ reviews.getProductId());
-		System.out.println("score: "+ reviews.getScore());
-		System.out.println("reviewContent: "+ reviews.getComment());
-		
-		System.out.println("FileName: "+ reviews.getFileName());
-		System.out.println("SaveFileName: "+ reviews.getSaveFileName());
-		System.out.println("ContentType: "+ reviews.getContentType());
-		System.out.println("---------getReviewData- END-------------");
 
 		return reviews;
 	}
 
-	@RequestMapping(value ="/downloadImage.do")
-	public void download(@RequestParam("fileId") String fileId, HttpServletRequest request,HttpServletResponse response) {
-	//	int fileinfoId = Integer.parseInt(request.getParameter("fileId"));
-		int fileinfoId = Integer.parseInt(fileId);
+	@GetMapping(path ="/downloadImage.do")
+	public void download(HttpServletRequest request,HttpServletResponse response) throws IOException {
 		System.out.println("파일 다운로드 컨트롤러");
-		System.out.println(fileinfoId);
-		System.out.println(fileinfoId == 0);
 		
-		if(fileinfoId == 0) { 
+		System.out.println("아이디: "+request.getParameter("fileId"));
+		int id = Integer.parseInt(request.getParameter("fileId"));
+
+		System.out.println(id);
+		if(id == 0) { // 파일 없으면 종료
 			return;
 		}
-/*		
-        response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\";");
+		
+		// 리뷰 이미지 경로 불러오기 
+		String saveFileName = reviewWriteService.selectReviewImageFile(id);
+		System.out.println(saveFileName); // tmp/reviewImage/eb1b2375-90d9-4711-9427-3e379f28033cimages.png
+
+		File file = new File("C:\\"+saveFileName);
+		System.out.println(file.getName());; // 1_map_1.png
+		System.out.println(file.length()); // 0
+		
+		String fileName = file.getName();
+		long fileLength = file.length(); 
+		
+		response.setHeader("Content-Disposition", "inline; filename=\"" + fileName + "\"");
+        response.setHeader("Content-Transfer-Encoding", "binary");
+		response.setHeader("Content-Length", "" + fileLength);
+        response.setHeader("Pragma", "no-cache;");
+        response.setHeader("Expires", "-1;");
+		
+        Files.copy(file.toPath(), response.getOutputStream());
+  /*      response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\";");
         response.setHeader("Content-Transfer-Encoding", "binary");
         response.setHeader("Content-Type", contentType);
         response.setHeader("Content-Length", "" + fileLength);
         response.setHeader("Pragma", "no-cache;");
         response.setHeader("Expires", "-1;");
-        */
+    */   
 	}
 /*	
 	@GetMapping("/download")

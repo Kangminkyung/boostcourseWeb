@@ -180,6 +180,7 @@ Reservation.prototype.showProductDetail = function(xhr){
 	document.querySelector(".section_btn").addEventListener("click", Reservation.prototype.reservate); // 4. 예약하기
 	Reservation.prototype.getAverageScore(res.averageScore); // 5-1. 평점
 	Reservation.prototype.getComments(res.comments); // 5-2. 한줄평
+
 };
 
 Reservation.prototype.reservate = function(){
@@ -201,9 +202,9 @@ Reservation.prototype.getComments = function(comments){
 		comment.score = comment.score.toFixed(1);
 		return innerHtml + template.detail.comment(comment);
 	}, "");
-
 	document.querySelector(".list_short_review").innerHTML += commentsHtml;
 	document.querySelector(".green").innerText = comments.length + "건";
+
 };
 
 

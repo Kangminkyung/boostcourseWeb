@@ -52,4 +52,9 @@ public class CommentDaoSqls {
 		"SELECT COUNT(*) "+
 		"FROM RESERVATION_USER_COMMENT_IMAGE "+
 		"WHERE RESERVATION_USER_COMMENT_ID = :commentId";
+	
+	public static String SELECT_REVIEW_IMAGE_FILE = 
+			"SELECT SAVE_FILE_NAME AS SAVEFILENAME " +
+			 "FROM FILE_INFO " +
+			 "WHERE ID = :id";
 }
