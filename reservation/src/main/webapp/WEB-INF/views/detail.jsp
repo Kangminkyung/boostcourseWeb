@@ -256,14 +256,13 @@
 	
 	<!-- template -->
 	<script type="reservation_template" id="titleImage">
-		<li class="item" style="width: 414px;">
-				<img alt="" class="img_thumb" src="{{productImage.productSaveFileName}}">
-			<!--	<img alt="" class="img_thumb" src="{{productImage.productSaveFileName}}"> -->
-				<span class="img_bg"></span>
+		<li class="item" style="width: 414px;" id="titleFileId" value="{{productImage.fileId}}">
+			<img alt="" class="img_thumb" src="{{productImage.productSaveFileName}}">
+			<span class="img_bg"></span>
         	<div class="visual_txt">
             	<div class="visual_txt_inn">
-                	<h2 class="visual_txt_tit"> <span>{{productDescription}}</span> </h2>
-                    <p class="visual_txt_dsc"></p>
+					<h2 class="visual_txt_tit"> <span>{{productDescription}}</span> </h2>
+                	<p class="visual_txt_dsc"></p>
                 	<h2 class="visual_txt_tit"> <span>{{productImage.fileId}}</span> </h2>
                 </div>
             </div>
@@ -281,7 +280,7 @@
 						{{/if}}
 						<div class="thumb_area">
 							<a class="thumb" title="이미지 크게 보기">
-							<img width="90" height="90" class="img_vertical_top" src="" alt="리뷰이미지">
+							<img alt ="{{fileId}}" width="90" height="90" class="img_vertical_top" id="reviewImageFile" src="{{saveFileName}}" alt="리뷰이미지">
 							</a>
 							<span class="img_count" >1</span>
 						</div>

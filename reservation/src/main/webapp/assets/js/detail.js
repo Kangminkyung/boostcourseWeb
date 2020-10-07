@@ -37,9 +37,12 @@ Promotion.prototype.requestAjax = function(){
 Promotion.prototype.showProductDetail = function(xhr){
 	let res = xhr.response;
 	Promotion.prototype.showTitleImages(res);// 1. 타이틀이미지
+	
+	
 };
 
 Promotion.prototype.showTitleImages = function(res){
+	console.log(res);
 	let productImages = res.productImages;
 	let productDescription = res.displayInfo.productDescription;
 
@@ -49,6 +52,9 @@ Promotion.prototype.showTitleImages = function(res){
 	let titleImage = document.querySelector(".visual_img.detail_swipe");
 	titleImage.innerHTML += template.detail.titleImage(one);
 	
+	console.log(one);
+	console.log(second);
+
 	if (productImages.length === 1) { // 이미지가 1장이면 버튼을 숨김
 		document.querySelector(".spr_book2.ico_arr6_lt").classList.add("off");
 		document.querySelector(".spr_book2.ico_arr6_rt").classList.add("off");
@@ -60,6 +66,24 @@ Promotion.prototype.showTitleImages = function(res){
 		
 		this.slideEvent(productImages);
 	}
+
+	document.querySelector("#titleFileId").addEventListener("click", function(){
+		let fileId = document.querySelector("#titleFileId").value;
+		console.log(" 슬라이드 전 이미지클릭");
+		console.log(fileId);
+		
+		let xhr = new XMLHttpRequest();
+		xhr.open("GET", "downloadImage.do=?fileId="+fileId, true);
+		
+		xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+		
+		xhr.addEventListener("load", function(){
+			}.bind(this)
+		);
+		xhr.send();
+		
+	});
+
 };
 
 Promotion.prototype.slideEvent = function(productImages){
@@ -112,6 +136,12 @@ Promotion.prototype.slideImage = function(click){
 			}, 300);
 		}
 	}
+	document.querySelector("#titleFileId").addEventListener("click", function(){
+		let fileId = document.querySelector("#titleFileId").value;
+		console.log(" 슬라이드 후 이미지클릭");
+		console.log(fileId);
+		ajaxRequest.sendRequest("GET", "downloadImage.do=?fileId="+fileId, true);
+	});
 };
 
 Product.prototype.initProducts = function(){

@@ -1363,7 +1363,7 @@ hr {
 .spr_icons {
     width: 30px;
     height: 30px;
-    background-image: url(../assets/img/spr_icons.629bfb7d82c6c1d00d86af55a6ead979.png);
+    background-image: url(/tmp/img/spr_icons.629bfb7d82c6c1d00d86af55a6ead979.png);
     background-size: 200px 320px;
     font-size: 0
 }
@@ -1533,7 +1533,7 @@ hr {
     background-position: 0 -288px
 }
 .spr_book {
-    background-image: url(../assets/img/spr_book.ada46c4e031284d4b513fda5c38b5187.png);
+    background-image: url(/tmp/img/spr_book.ada46c4e031284d4b513fda5c38b5187.png);
     background-size: 400px 400px
 }
 .spr_book.ico_nessasary {
@@ -1685,7 +1685,7 @@ hr {
     background-position: -358px -295px
 }
 .spr_book2 {
-    background-image: url(../assets/img/spr_book2.9951b6760ed19190feefaf8e9c5bed2e.png);
+    background-image: url(/tmp/img/spr_book2.9951b6760ed19190feefaf8e9c5bed2e.png);
     background-size: 330px 400px;
     font-size: 0
 }
@@ -1855,7 +1855,7 @@ hr {
     background-position: 0 -184px
 }
 .spr_bi {
-    background-image: url('../assets/img/spr_bi.c753b938cfe0481b000adab9b84a1f8c.png');
+    background-image: url('/tmp/img/spr_bi.c753b938cfe0481b000adab9b84a1f8c.png');
     background-size: 130px 154px;
     font-size: 0
 }
@@ -1912,7 +1912,7 @@ hr {
     background-position: -72px -120px
 }
 .spr_home {
-    background-image: url('../assets/img/spr_home.70cfae680703bc68ceac252c5a5c2070.png');
+    background-image: url('/tmp/img/spr_home.70cfae680703bc68ceac252c5a5c2070.png');
     background-size: 220px 120px;
     font-size: 0
 }
@@ -2047,7 +2047,7 @@ input[type=radio].chk_agree+.label:before {
     overflow: hidden;
     display: inline-block;
     color: transparent;
-    background-image: url(../assets/img/spr_book2.9951b6760ed19190feefaf8e9c5bed2e.png);
+    background-image: url(/tmp/img/spr_book2.9951b6760ed19190feefaf8e9c5bed2e.png);
     background-size: 330px 400px;
     vertical-align: top
 }
@@ -2057,7 +2057,7 @@ input[type=radio].chk_agree+.label:before {
     font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', Helvetica Nenu, Helvetica, Roboto, Arial, NanumGothicWebB, '맑은 고딕', MalgunGothic, '돋움', Dotum, sans-serif
 }
 input[type=checkbox].chk_custom+.label:before {
-    background-image: url(../assets/img/spr_book.ada46c4e031284d4b513fda5c38b5187.png);
+    background-image: url(/tmp/img/spr_book.ada46c4e031284d4b513fda5c38b5187.png);
     background-size: 400px 400px;
     margin-right: 6px;
     width: 21px!important;
@@ -2772,7 +2772,7 @@ select {
     left: 0;
     width: 9px;
     height: 11px;
-    //background-image: url(../assets/img/spr_book2.9951b6760ed19190feefaf8e9c5bed2e.png);
+    //background-image: url(/tmp/img/spr_book2.9951b6760ed19190feefaf8e9c5bed2e.png);
     background-size: 330px 400px;
     background-repeat: no-repeat;
     background-position: -299px -26px;
@@ -4830,7 +4830,7 @@ select {
     overflow: hidden;
     display: inline-block;
     color: transparent;
-    background-image: url(../assets/img/spr_book2.9951b6760ed19190feefaf8e9c5bed2e.png);
+    background-image: url(/tmp/img/spr_book2.9951b6760ed19190feefaf8e9c5bed2e.png);
     background-size: 330px 400px;
     vertical-align: top;
     width: 11px;
@@ -7318,7 +7318,7 @@ select {
     width: 26px!important;
     height: 26px!important;
     background-position: -75px -273px;
-    background-image: url(../assets/img/spr_book2.9951b6760ed19190feefaf8e9c5bed2e.png);
+    background-image: url(/tmp/img/spr_book2.9951b6760ed19190feefaf8e9c5bed2e.png);
     background-size: 330px 400px;
     vertical-align: -8.5px
 }
@@ -11623,7 +11623,7 @@ select {
     width: 78px;
     height: 14px;
     margin-right: 5px;
-    background-image: url('../assets/img/spr_comment.ff5a8d338b14ea0341f85205cde86b81.png');
+    background-image: url('/tmp/img/spr_comment.ff5a8d338b14ea0341f85205cde86b81.png');
     background-repeat: no-repeat;
     background-size: 90px 130px;
     background-position: 0 -61px;
@@ -11636,7 +11636,7 @@ select {
     color: transparent;
     vertical-align: top;
     float: left;
-    background-image: url('../assets/img/spr_comment.ff5a8d338b14ea0341f85205cde86b81.png');
+    background-image: url('/tmp/img/spr_comment.ff5a8d338b14ea0341f85205cde86b81.png');
     background-repeat: no-repeat;
     background-size: 90px 130px;
     background-position: 0 -76px
@@ -11701,7 +11701,7 @@ select {
     width: 35px;
     height: 32px;
     margin-left: -38px;
-    background-image: url('../assets/img/spr_comment.ff5a8d338b14ea0341f85205cde86b81.png');
+    background-image: url('/tmp/img/spr_comment.ff5a8d338b14ea0341f85205cde86b81.png');
     background-repeat: no-repeat;
     background-size: 90px 130px;
     background-position: 0 -92px;
@@ -12115,7 +12115,7 @@ select {
 .section_review_list .grade_area .graph_mask,
 .section_review_list .grade_area .graph_value,
 .section_review_list .short_review_area .review_info .grade:before {
-    background-image: url('../assets/img/spr_comment.ff5a8d338b14ea0341f85205cde86b81.png');
+    background-image: url('/tmp/img/spr_comment.ff5a8d338b14ea0341f85205cde86b81.png');
     background-repeat: no-repeat;
     background-size: 90px 130px
 }
@@ -12423,7 +12423,7 @@ select {
     overflow: hidden;
     display: inline-block;
     color: transparent;
-    background-image: url(../assets/img/spr_book2.9951b6760ed19190feefaf8e9c5bed2e.png);
+    background-image: url(/tmp/img/spr_book2.9951b6760ed19190feefaf8e9c5bed2e.png);
     background-size: 330px 400px;
     vertical-align: top;
     text-indent: 100%;

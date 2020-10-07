@@ -125,7 +125,7 @@
 	</script>
 	
 	<script type="reservation_template" id="promotion">
-		<li class="item" style="background-image: url('<%=request.getContextPath() %>/assets/{{productImageUrl}}')">
+		<li class="item" style="background-image: url('/tmp/{{productImageUrl}}')">
 			<a href="#">
 				<span class="img_btm_border"></span>
 				<span class="img_right_border"></span>
@@ -143,7 +143,7 @@
 		<li class="item">
 			<a href="<%=request.getContextPath() %>/detail?displayInfoId={{displayInfoId}}&productId={{productId}}" class="item_book">
 				<div class="item_preview">
-					<img alt={{productDescription}} class="img_thumb" src = "<%=request.getContextPath() %>/assets/{{productImageUrl}}"/>
+					<img alt={{productDescription}} class="img_thumb" src = "/tmp/{{productImageUrl}}"/>
 					<span class="img_border"></span>
 				</div>
 				<div class="event_txt">

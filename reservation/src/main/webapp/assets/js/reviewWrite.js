@@ -122,7 +122,8 @@ Review.prototype.initTextarea = function(){
 	});
 
 	reviewTextarea.addEventListener("blur", function(e){
-		if(e.target.value === 0){
+		if(e.target.value == ""){
+			console.log(e.target.value);
 			reviewTextarea.classList.remove("focus");
 			reviewWriteInfo.classList.remove("blind");
 		}
@@ -201,25 +202,18 @@ Review.prototype.updateForm = function(){
 
     document.querySelector("#reservationId").value = Review.prototype.getReservationId();
     document.querySelector("#productId").value = Review.prototype.getProductId();
-
     document.querySelector("#score").value = document.querySelector(".star_rank").innerText;
     document.querySelector("#reviewContent").value = Review.prototype.getReviewContent();
-    console.log(document.querySelector(".review_textarea").value);
-    console.log(document.querySelector(".review_textarea").value.substring(0, textLimit));
-    console.log(document.querySelector("#comment"));
-
     document.querySelector("#comment").value = document.querySelector(".review_textarea").value.substring(0, textLimit);
   
     document.querySelector("#reviewForm").onsubmit = () => {
     	console.log(Review.prototype.checkForm());
     	return Review.prototype.checkForm(); // onsubmit= true일때만 폼 전송
     }
-    
 };
 
 Review.prototype.checkForm = function(){
 
-	console.log("체크폼");
 	if(document.querySelector("#reviewContent").value > 0){
 		console.log(typeof(document.querySelector("#reviewContent").value));
 		console.log(document.querySelector("#reviewContent").value);

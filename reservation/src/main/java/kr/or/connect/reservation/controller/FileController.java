@@ -1,5 +1,6 @@
 package kr.or.connect.reservation.controller;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -12,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -89,9 +92,25 @@ public class FileController {
 		return reviews;
 	}
 
-	@GetMapping("/downloadImage")
-	public void download(HttpServletRequest request,HttpServletResponse response) {
+	@GetMapping(path ="/downloadImage.do")
+	public void download(@RequestParam("FileId") String FileId, HttpServletRequest request,HttpServletResponse response) {
 		int fileId = Integer.parseInt(request.getParameter("FileId"));
+		
+		System.out.println("파일 다운로드 컨트롤러");
+		System.out.println(fileId);
+		System.out.println(fileId == 0);
+		
+		if(fileId == 0) { 
+			return;
+		}
+/*		
+        response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\";");
+        response.setHeader("Content-Transfer-Encoding", "binary");
+        response.setHeader("Content-Type", contentType);
+        response.setHeader("Content-Length", "" + fileLength);
+        response.setHeader("Pragma", "no-cache;");
+        response.setHeader("Expires", "-1;");
+        */
 	}
 /*	
 	@GetMapping("/download")

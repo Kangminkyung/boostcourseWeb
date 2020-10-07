@@ -268,7 +268,7 @@ hr {
     overflow: hidden;
     display: inline-block;
     color: transparent;
-    background-image: url('../assets/img/spr_book.png?1602251400');
+    background-image: url('/tmp/img/spr_book.png?1602251400');
     background-size: 400px 400px;
     vertical-align: top;
     text-indent: 100%;
@@ -686,7 +686,7 @@ hr {
     overflow: hidden;
     display: inline-block;
     color: transparent;
-    background-image: url('../assets/img/spr_book2.png?1602251400');
+    background-image: url('/tmp/img/spr_book2.png?1602251400');
     background-size: 330px 300px;
     vertical-align: top;
     text-indent: 100%;
@@ -1572,7 +1572,7 @@ input[type="checkbox"].chk_agree + label::before {
     overflow: hidden;
     display: inline-block;
     color: transparent;
-    background-image: url('../assets/img/spr_book2.png?1512221500');
+    background-image: url('/tmp/img/spr_book2.png?1512221500');
     background-size: 330px 300px;
     vertical-align: top;
 }
@@ -2538,7 +2538,7 @@ select {
     left: 0;
     width: 9px;
     height: 11px;
-    background-image: url('../assets/img/spr_book2.png?1512221500');
+    background-image: url('/tmp/img/spr_book2.png?1512221500');
     background-size: 330px 300px;
     background-repeat: no-repeat;
     background-position: -299px -26px;
@@ -3710,7 +3710,7 @@ select {
     right: 71.5px;
     width: 12px;
     height: 7.5px;
-    background-image: url('../assets/img/spr_book2.png?1602251400');
+    background-image: url('/tmp/img/spr_book2.png?1602251400');
     background-size: 330px 300px;
     background-position: -296px -62px;
 }
@@ -4392,7 +4392,7 @@ select {
     overflow: hidden;
     display: inline-block;
     color: transparent;
-    background-image: url('../assets/img/spr_book2.png?1512221500');
+    background-image: url('/tmp/img/spr_book2.png?1512221500');
     background-size: 330px 300px;
     vertical-align: top;
     width: 11px;
@@ -6307,7 +6307,7 @@ select {
     display: inline-block;
     width: 11px;
     height: 20px;
-    background-image: url('../assets/img/spr_book2.png?1512221500');
+    background-image: url('/tmp/img/spr_book2.png?1512221500');
     background-size: 330px 300px;
     background-repeat: no-repeat;
     background-position: -138px -55px;
@@ -10224,7 +10224,7 @@ select {
     left: 12px;
     width: 78px;
     height: 14px;
-    background-image: url('../assets/img/spr_comment.png');
+    background-image: url('/tmp/img/spr_comment.png');
     background-repeat: no-repeat;
     background-size: 89px 100px;
     background-position: 0 -61px;
@@ -10233,7 +10233,7 @@ select {
 }
 .write_act .review_rating .bg_star > span {
     float: left;
-    background-image: url('../assets/img/spr_comment.png');
+    background-image: url('/tmp/img/spr_comment.png');
     background-repeat: no-repeat;
     background-size: 89px 100px;
     background-position: 0 -76px;
@@ -10418,7 +10418,7 @@ select {
 .section_review_box_wrap .grade_area .graph_mask,
 .section_review_box_wrap .grade_area .graph_value,
 .section_review_box_wrap .short_review_area .review_info .grade:before {
-    background-image: url('../assets/img/spr_comment.png');
+    background-image: url('/tmp/img/spr_comment.png');
     background-repeat: no-repeat;
     background-size: 89px 100px;
 }
@@ -10760,7 +10760,7 @@ select {
     overflow: hidden;
     display: inline-block;
     color: transparent;
-    background-image: url('../assets/img/spr_book2.png?1512221500');
+    background-image: url('/tmp/img/spr_book2.png?1512221500');
     background-size: 330px 300px;
     vertical-align: top;
     text-indent: 100%;
