@@ -44,7 +44,7 @@ public class FileController {
 		
         try(
                 // 윈도우일 경우
-                FileOutputStream fos = new FileOutputStream("c:/tmp/" + fileName);
+                FileOutputStream fos = new FileOutputStream("c:/tmp/reviewImage/" + fileName);
                 InputStream is = file.getInputStream();
         ){
         	    int readCount = 0;
@@ -75,7 +75,7 @@ public class FileController {
 		reviews.setComment(formData.getParameter("comment"));
 		
 		reviews.setFileName(uuid + file.getOriginalFilename());
-		reviews.setSaveFileName("/reviewImage/"+ uuid + file.getOriginalFilename());
+		reviews.setSaveFileName("/tmp/reviewImage/"+ uuid + file.getOriginalFilename());
 		reviews.setContentType(file.getContentType());
 
 		return reviews;
