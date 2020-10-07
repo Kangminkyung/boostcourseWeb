@@ -27,8 +27,8 @@ public class ReviewWriteDao {
 		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
 	}
 
-	// 리뷰 코멘트 등록
-	public int insertUserReview(ReviewWrite reviews) {
+	// 코멘트 등록
+	public int insertUserComment(ReviewWrite reviews) {
 		int commentId = 0;
 		
 		try {
@@ -90,7 +90,7 @@ public class ReviewWriteDao {
 	}
 
 	// 리뷰 + 사진 등록
-	public int insertUserReviewFileImage(int reservationInfoId, int commentId, int fileId) {
+	public int insertUserCommentFileImage(int reservationInfoId, int commentId, int fileId) {
 		int commentImageId = 0;
 		
 		System.out.println("예약번호 reservationInfoId: "+reservationInfoId);

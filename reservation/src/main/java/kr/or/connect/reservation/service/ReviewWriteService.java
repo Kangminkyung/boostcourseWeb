@@ -20,11 +20,14 @@ public class ReviewWriteService {
 		
 		if(isEmpty) {
 			// 사진 없음 텍스트만 등록
-			reviewWriteDao.insertUserReview(reviews);
+			System.out.println("사진없음 텍스트만 등록");
+			reviewWriteDao.insertUserComment(reviews);
 		}else {
 			// 사진 있음 텍스트, 파일 등록
-			reviewWriteDao.insertUserReviewFileImage(reviews.getReservationId(),
-					reviewWriteDao.insertUserReview(reviews),
+			System.out.println("사진 텍스트 등록");
+
+			reviewWriteDao.insertUserCommentFileImage(reviews.getReservationId(),
+					reviewWriteDao.insertUserComment(reviews),
 					reviewWriteDao.insertFileImage(reviews));
 		}
 	}

@@ -117,6 +117,7 @@
 						<input type="hidden" name="productId" id="productId" value=""/>
 						<input type="hidden" name="score" id="score" value=""/>
 						<input type="hidden" name="reviewContent" id="reviewContent" value=""/>
+						<input type="hidden" name="comment" id="comment" value=""/>
 					</div>
 					<!-- 리뷰 등록 -->
 					<div class="box_bk_btn">

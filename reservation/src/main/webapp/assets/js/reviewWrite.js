@@ -197,13 +197,19 @@ Review.prototype.updateForm = function(){
 	
     let reviewForm = document.querySelector("#reviewForm");
     let hiddenSection = document.querySelector("#hiddenSection");
+	let textLimit = parseInt(document.querySelector(".guide_review .textLimit").innerText);
 
     document.querySelector("#reservationId").value = Review.prototype.getReservationId();
     document.querySelector("#productId").value = Review.prototype.getProductId();
 
     document.querySelector("#score").value = document.querySelector(".star_rank").innerText;
     document.querySelector("#reviewContent").value = Review.prototype.getReviewContent();
+    console.log(document.querySelector(".review_textarea").value);
+    console.log(document.querySelector(".review_textarea").value.substring(0, textLimit));
+    console.log(document.querySelector("#comment"));
 
+    document.querySelector("#comment").value = document.querySelector(".review_textarea").value.substring(0, textLimit);
+  
     document.querySelector("#reviewForm").onsubmit = () => {
     	console.log(Review.prototype.checkForm());
     	return Review.prototype.checkForm(); // onsubmit= true일때만 폼 전송

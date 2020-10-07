@@ -33,14 +33,11 @@ public class FileController {
 		String uuid = UUID.randomUUID().toString(); // 중복없는 fileName 생성
 		String fileName = uuid + file.getOriginalFilename();
 		String directURL = "redirect:/myreservation?reservationEmail=";
-		System.out.println("파일 이름 : " + file.getOriginalFilename());
-		System.out.println("파일 크기 : " + file.getSize());
-
 		String reservationEmail = formData.getParameter("reservationEmail");
 		directURL += reservationEmail;
-		System.out.println("다이렉트주소: " + directURL);
-		System.out.println("uuid: " + uuid);
+		
 
+		
         try(
                 // 윈도우일 경우
                 FileOutputStream fos = new FileOutputStream("c:/tmp/" + fileName);
@@ -55,6 +52,10 @@ public class FileController {
             reviewWriteService.addReviewData(reviews, file.isEmpty());
             
         }catch(Exception ex){
+    		System.out.println("다이렉트주소: " + directURL);
+    		System.out.println("파일 이름 : " + file.getOriginalFilename());
+    		System.out.println("파일 크기 : " + file.getSize());
+    		System.out.println("uuid: " + uuid);
             throw new RuntimeException("file Save Error");
         }
 	
@@ -64,17 +65,22 @@ public class FileController {
 	private ReviewWrite getReviewData(MultipartHttpServletRequest formData, MultipartFile file, String uuid) {
 		ReviewWrite reviews = new ReviewWrite();
 		
+		reviews.setReservationId(Integer.parseInt(formData.getParameter("reservationId")));
 		reviews.setProductId(Integer.parseInt(formData.getParameter("productId")));
 		reviews.setScore(Double.parseDouble(formData.getParameter("score")));
-		reviews.setComment(formData.getParameter("reviewContent"));
+		reviews.setComment(formData.getParameter("comment"));
+		
 		reviews.setFileName(uuid + file.getOriginalFilename());
 		reviews.setSaveFileName("image/"+ uuid + file.getOriginalFilename());
 		reviews.setContentType(file.getContentType());
 		
+		
 		System.out.println("---------getReviewData--------------");
+		System.out.println("reservationId: "+ reviews.getReservationId());
 		System.out.println("productId: "+ reviews.getProductId());
 		System.out.println("score: "+ reviews.getScore());
 		System.out.println("reviewContent: "+ reviews.getComment());
+		
 		System.out.println("FileName: "+ reviews.getFileName());
 		System.out.println("SaveFileName: "+ reviews.getSaveFileName());
 		System.out.println("ContentType: "+ reviews.getContentType());
