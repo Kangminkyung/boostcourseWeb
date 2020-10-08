@@ -2,8 +2,6 @@ package kr.or.connect.reservation.dao;
 
 import javax.sql.DataSource;
 
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -18,7 +16,6 @@ import kr.or.connect.reservation.dto.ReviewWrite;
 @Repository
 public class ReviewWriteDao {
 	private NamedParameterJdbcTemplate jdbc;
-	private RowMapper<ReviewWrite> reviewWriteMapper = BeanPropertyRowMapper.newInstance(ReviewWrite.class);
 	private SimpleJdbcInsert insertAction;
 	DataSource dataSource;
 	
@@ -45,12 +42,6 @@ public class ReviewWriteDao {
 			this.insertAction = new SimpleJdbcInsert(this.dataSource).withTableName("reservation_user_comment").usingGeneratedKeyColumns("id");
 		    commentId = this.insertAction.executeAndReturnKey(params).intValue();
 		   
-		    System.out.println("코멘트삽입(reservation_user_comment) commentId: "+ commentId);
-		    System.out.println("1)getReservationId : "+reservationUserComment.getReservationInfoId());
-		    System.out.println("2)리뷰삽입 getProductId : "+reservationUserComment.getProductId());
-		    System.out.println("3)리뷰삽입 getScore : "+reservationUserComment.getScore());
-		    System.out.println("4)리뷰삽입 getComment : "+reservationUserComment.getComment());
-
 		}catch(Exception e) {
 			e.printStackTrace();
 			return -1;
@@ -76,11 +67,6 @@ public class ReviewWriteDao {
 			this.insertAction = new SimpleJdbcInsert(this.dataSource).withTableName("file_info").usingGeneratedKeyColumns("id");
 		    fileId = this.insertAction.executeAndReturnKey(params).intValue();
 		  
-		    System.out.println("이미지파일삽입(file_info) fileId: "+ fileId);
-		    System.out.println("1)getFileName : "+fileInfo.getFileName());
-		    System.out.println("2)getSaveFileName : "+fileInfo.getSaveFileName());
-		    System.out.println("3)getContentType : "+fileInfo.getContentType());
-		    System.out.println("4)getDeleteFlag : "+fileInfo.getDeleteFlag());
 		}catch(Exception e) {
 			e.printStackTrace();
 			return -1;
@@ -93,7 +79,6 @@ public class ReviewWriteDao {
 	public int insertUserCommentFileImage(int reservationInfoId, int commentId, int fileId) {
 		int commentImageId = 0;
 		
-		System.out.println("예약번호 reservationInfoId: "+reservationInfoId);
 		try {
 			ReservationUserCommentImage reservationUserCommentImage = new ReservationUserCommentImage();
 			
@@ -106,11 +91,7 @@ public class ReviewWriteDao {
 		    // commentId 고유키 가져오기
 			this.insertAction = new SimpleJdbcInsert(this.dataSource).withTableName("reservation_user_comment_image").usingGeneratedKeyColumns("id");
 			commentImageId = this.insertAction.executeAndReturnKey(params).intValue();
-		  
-			System.out.println("이미지+코멘트삽입(reservation_user_comment_image) commentImageId: "+ commentImageId);
-		    System.out.println("1)reservationInfoId : "+reservationInfoId);
-		    System.out.println("2)commentImageId : "+commentImageId);
-		    System.out.println("3)fileId : "+fileId);
+		
 		}catch(Exception e) {
 			e.printStackTrace();
 			return -1;

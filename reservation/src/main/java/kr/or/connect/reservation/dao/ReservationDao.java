@@ -3,9 +3,7 @@ package kr.or.connect.reservation.dao;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -19,7 +17,6 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import kr.or.connect.reservation.dto.MyReservation;
-import kr.or.connect.reservation.dto.Reservation;
 import kr.or.connect.reservation.dto.ReservationForm;
 import kr.or.connect.reservation.dto.ReservationPrice;
 
@@ -29,7 +26,6 @@ import static kr.or.connect.reservation.dao.ReservationDaoSqls.*;
 public class ReservationDao {
 	
 	private NamedParameterJdbcTemplate jdbc;
-	private RowMapper<MyReservation> myReservationMapper = BeanPropertyRowMapper.newInstance(MyReservation.class);
 
 	public ReservationDao(DataSource dataSource) {
 		this.jdbc = new NamedParameterJdbcTemplate(dataSource);

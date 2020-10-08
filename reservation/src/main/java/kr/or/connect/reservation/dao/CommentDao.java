@@ -1,6 +1,5 @@
 package kr.or.connect.reservation.dao;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +23,6 @@ public class CommentDao {
 	private NamedParameterJdbcTemplate jdbc;
 	private RowMapper<Comment> commentMapper = BeanPropertyRowMapper.newInstance(Comment.class);
 	private RowMapper<CommentImage> commentImageMapper = BeanPropertyRowMapper.newInstance(CommentImage.class);
-	private RowMapper<FileInfo> fileInfoMapper = BeanPropertyRowMapper.newInstance(FileInfo.class);
 
 	public CommentDao(DataSource dataSource) {
 		this.jdbc = new NamedParameterJdbcTemplate(dataSource);

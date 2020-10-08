@@ -1,7 +1,5 @@
 package kr.or.connect.reservation.dao;
 
-import static kr.or.connect.reservation.dao.CommentDaoSqls.GET_COMMENT_IMAGES_BY_COMMENT_ID;
-
 public class CommentDaoSqls {
 	
 	public static String GET_COMMENT_LIST = 

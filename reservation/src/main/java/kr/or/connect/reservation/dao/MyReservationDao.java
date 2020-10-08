@@ -13,7 +13,6 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import kr.or.connect.reservation.dto.MyReservation;
-import kr.or.connect.reservation.dto.ProductImage;
 import kr.or.connect.reservation.dto.TicketInfo;
 
 import static kr.or.connect.reservation.dao.MyReservationDaoSqls.*;

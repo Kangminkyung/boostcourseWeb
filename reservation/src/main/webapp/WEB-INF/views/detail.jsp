@@ -263,7 +263,6 @@
             	<div class="visual_txt_inn">
 					<h2 class="visual_txt_tit"> <span>{{productDescription}}</span> </h2>
                 	<p class="visual_txt_dsc"></p>
-                	<h2 class="visual_txt_tit"> <span>{{productImage.fileId}}</span> </h2>
                 </div>
             </div>
 		</li>

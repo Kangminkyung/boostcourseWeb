@@ -90,8 +90,8 @@
 							{{break}}
 						{{/if}}
 						<div class="thumb_area">
-							<a class="thumb" title="이미지 크게 보기">
-								<img width="90" height="90" class="img_vertical_top" src="{{saveFileName}}" alt="리뷰이미지">
+							<a class="thumb" title="이미지 크게 보기" href="<%=request.getContextPath() %>/downloadImage.do?fileId={{fileId}}">
+								<img alt ="" width="90" height="90" class="img_vertical_top" id="reviewImageFile" src="{{saveFileName}}" alt="리뷰이미지">
 							</a>
 							<span class="img_count">1</span>
 						</div>
