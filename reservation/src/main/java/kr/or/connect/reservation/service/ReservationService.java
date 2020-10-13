@@ -17,11 +17,11 @@ public class ReservationService {
 	public int addReservation(ReservationForm reservationForm) {
 		
 		// 예약 테이블에 데이터 삽입
-		int rsvnId = reservationDao.insertReservation(reservationForm);
+		int reservationId = reservationDao.insertReservation(reservationForm);
 		
 		// 가격 테이블에 데이터 삽입
-		reservationDao.insertPrices(reservationForm, rsvnId);
-		return rsvnId;
+		reservationDao.insertPrices(reservationForm, reservationId);
+		return reservationId;
 	}
 
 

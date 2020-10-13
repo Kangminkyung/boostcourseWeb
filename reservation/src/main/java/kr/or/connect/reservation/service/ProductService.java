@@ -20,7 +20,6 @@ import kr.or.connect.reservation.dto.ProductPrice;
 @Service
 public class ProductService {
 	private static final int LIMIT = 4;
-	private final int SIZE_PER_PAGE = 3; // comments 갯수
 	private final int HIDE_EMAIL_LENGTH = 4;
 
 	@Autowired
@@ -32,34 +31,28 @@ public class ProductService {
 	@Autowired
 	private CommentDao commentDao;
 	
-	@Transactional(readOnly=true)
 	public int getCountProduct() {
 		return this.productDao.getCountProduct();
 	}
 
-	@Transactional(readOnly=true)
 	public int getCountProductByCategory(int categoryId) {
 		return this.productDao.getCountProductByCategory(categoryId);
 	}
 	
-	@Transactional(readOnly=true)
 	public List<Product> getProductList(int start) {
 		return this.productDao.getProductList(start, LIMIT);
 	}
 	
-	@Transactional(readOnly=true)
 	public List<Product> getProductListByCategory(int start, int categoryId) {
 		return this.productDao.getProductListByCategory(start, LIMIT, categoryId);
 	}
 	
 	/* productDetail 정보 불러오기 */
 	
-	@Transactional(readOnly=true)
 	public DisplayInfo getDisplayInfo(int displayInfoId) {
 		return this.displayInfoDao.getDisplayInfo(displayInfoId);
 	}
 	
-	@Transactional(readOnly=true)
 	public List<DisplayInfoImage> getDisplayInfoImages(int displayInfoId) {
 		
 		List<DisplayInfoImage> displayInfoImageList = displayInfoDao.getDisplayInfoImages(displayInfoId);
@@ -74,7 +67,6 @@ public class ProductService {
 		return displayInfoImageList;
 	}
 	
-	@Transactional(readOnly=true)
 	public List<ProductImage> getProductImages(int productId) {
 		
 		List<ProductImage> productImages = productDao.getProductImages(productId);
@@ -89,7 +81,6 @@ public class ProductService {
 		return productImages;
 	}
 	
-	@Transactional(readOnly=true)
 	public List<Comment> getComments(int displayInfoId) {
 		
 		List<Comment> comments = commentDao.getComments(displayInfoId);
@@ -109,7 +100,6 @@ public class ProductService {
 		return comments;
 	}
 	
-	@Transactional(readOnly=true)
 	public double getAverageScore(int displayInfoId) {
 		try {
 			return commentDao.getAverageScore(displayInfoId);

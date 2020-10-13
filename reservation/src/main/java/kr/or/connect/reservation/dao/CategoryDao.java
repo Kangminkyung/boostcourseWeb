@@ -1,6 +1,5 @@
 package kr.or.connect.reservation.dao;
 
-import java.util.Collections;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -11,11 +10,11 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import kr.or.connect.reservation.dto.Category;
-import static kr.or.connect.reservation.dao.CategoryDaoSqls.*;
+import static kr.or.connect.reservation.dao.CategoryDaoSql.*;
 
 @Repository
 public class CategoryDao {
-	private NamedParameterJdbcTemplate jdbc;
+	private final NamedParameterJdbcTemplate jdbc;
 	private RowMapper<Category> rowMapper = BeanPropertyRowMapper.newInstance(Category.class);
 	
 	public CategoryDao(DataSource dataSource) {
@@ -23,6 +22,6 @@ public class CategoryDao {
 	}
 	
 	public List<Category> selectAll(){
-		return jdbc.query(SELECT_ALL, Collections.emptyMap(), rowMapper);
+		return jdbc.query(SELECT_ALL, rowMapper);
 	}
 }

@@ -15,7 +15,6 @@ public class PromotionService {
 	@Autowired
 	private PromotionDao promotionDao;
 	
-	@Transactional(readOnly=true)
 	public List<Promotion> getPromotions(){
 		return this.promotionDao.selectAll();
 	}

@@ -13,14 +13,13 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.connect.reservation.dto.Comment;
 import kr.or.connect.reservation.dto.CommentImage;
-import kr.or.connect.reservation.dto.FileInfo;
 
-import static kr.or.connect.reservation.dao.CommentDaoSqls.*;
+import static kr.or.connect.reservation.dao.CommentDaoSql.*;
 
 @Repository
 public class CommentDao {
 
-	private NamedParameterJdbcTemplate jdbc;
+	private final NamedParameterJdbcTemplate jdbc;
 	private RowMapper<Comment> commentMapper = BeanPropertyRowMapper.newInstance(Comment.class);
 	private RowMapper<CommentImage> commentImageMapper = BeanPropertyRowMapper.newInstance(CommentImage.class);
 
@@ -52,19 +51,15 @@ public class CommentDao {
 		
 			comment.setCommentImages(imageList);
 			
-			// 4. comment 별 count 구하기
-			int imageCount = 0;
-			imageCount = getCommentImageCount(comment.getCommentId());
-			
-			if(imageCount !=0 ) 
-				comment.setImageCount(imageCount);
+			// 4. comment 별 이미지 갯수 구하기
+			comment.setImageCount(getCommentImageCount(comment.getCommentId()));
 		}
 
 		return commentList;
 	}
 
 
-	public List<CommentImage> getImages(int reservationUserCommentId){
+	private List<CommentImage> getImages(int reservationUserCommentId){
 		Map<String, Integer> map = new HashMap<>();
 		map.put("reservationUserCommentId", reservationUserCommentId);
 		return jdbc.query(GET_COMMENT_IMAGES_BY_COMMENT_ID, map, commentImageMapper);

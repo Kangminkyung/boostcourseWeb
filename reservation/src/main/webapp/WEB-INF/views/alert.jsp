@@ -5,5 +5,5 @@
 
 <script type="text/javascript">
 	alert("${message}");  	
-	location.href="${url}";
+	location.href="${uri}";
 </script>

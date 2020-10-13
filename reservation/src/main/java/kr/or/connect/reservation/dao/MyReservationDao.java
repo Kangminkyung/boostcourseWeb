@@ -15,12 +15,12 @@ import org.springframework.stereotype.Repository;
 import kr.or.connect.reservation.dto.MyReservation;
 import kr.or.connect.reservation.dto.TicketInfo;
 
-import static kr.or.connect.reservation.dao.MyReservationDaoSqls.*;
+import static kr.or.connect.reservation.dao.MyReservationDaoSql.*;
 
 @Repository
 public class MyReservationDao {
 
-	private NamedParameterJdbcTemplate jdbc;
+	private final NamedParameterJdbcTemplate jdbc;
 	private RowMapper<MyReservation> myReservationMapper = BeanPropertyRowMapper.newInstance(MyReservation.class);
 	private RowMapper<TicketInfo> ticketInfoMapper = BeanPropertyRowMapper.newInstance(TicketInfo.class);
 

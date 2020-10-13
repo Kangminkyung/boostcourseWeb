@@ -15,6 +15,7 @@ public class BookingloginController {
 	
 	@GetMapping(path = "/bookingloginPage")
 	public ModelAndView bookingloginPage() {
+		System.out.println("bookintlogin controller");
 		ModelAndView bookingloginPage = new ModelAndView("/bookinglogin");
 		return bookingloginPage;
 	}

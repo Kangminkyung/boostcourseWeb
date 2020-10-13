@@ -19,7 +19,8 @@ import kr.or.connect.reservation.interceptor.LoginInterceptor;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.multipart.MultipartResolver;
 
-//WebMvcContextConfiguration는 DispatcherServlet가 읽어들일 설정
+/* WebMvcContextConfiguration는 DispatcherServlet가 읽어들일 설정 */
+
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = {"kr.or.connect.reservation.controller"})

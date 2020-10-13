@@ -39,14 +39,14 @@ public class FileController {
 		
         try(
                 // 윈도우일 경우
-                FileOutputStream fos = new FileOutputStream("c:/tmp/reviewImage/" + fileName);
-                InputStream is = file.getInputStream();
+            FileOutputStream fos = new FileOutputStream("c:/tmp/reviewImage/" + fileName);
+            InputStream is = file.getInputStream();
         ){
-        	    int readCount = 0;
-        	    byte[] buffer = new byte[1024];
-            while((readCount = is.read(buffer)) != -1){
-                fos.write(buffer,0,readCount);
-            }
+        	int readCount;
+        	byte[] buffer = new byte[1024];
+        	while((readCount = is.read(buffer)) != -1){
+        		fos.write(buffer,0,readCount);
+        	}
             ReviewWrite reviews = getReviewData(formData, file, uuid);
             reviewWriteService.addReviewData(reviews, file.isEmpty());
             
@@ -73,11 +73,10 @@ public class FileController {
 	}
 
 	@GetMapping(path ="/downloadImage.do")
-	public void download(HttpServletRequest request,HttpServletResponse response) throws IOException {
+	public void download(HttpServletRequest request,HttpServletResponse response){
 
 		int id = Integer.parseInt(request.getParameter("fileId"));
 
-		System.out.println(id);
 		if(id == 0) { // 파일 없으면 종료
 			return;
 		}
@@ -96,13 +95,13 @@ public class FileController {
         response.setHeader("Expires", "-1;");
 		
         try(
-                FileInputStream fis = new FileInputStream(file);
-                OutputStream out = response.getOutputStream();
+            FileInputStream fis = new FileInputStream(file);
+            OutputStream out = response.getOutputStream();
         ){
-        	    int readCount = 0;
-        	    byte[] buffer = new byte[1024];
+        	int readCount = 0;
+        	byte[] buffer = new byte[1024];
             while((readCount = fis.read(buffer)) != -1){
-            		out.write(buffer,0,readCount);
+            	out.write(buffer,0,readCount);
             }
         }catch(Exception ex){
             throw new RuntimeException("file Save Error");

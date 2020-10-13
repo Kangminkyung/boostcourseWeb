@@ -24,11 +24,10 @@ public class PageController {
 	
 	@GetMapping("/detail")
 	public ModelAndView productDetail(@RequestParam int displayInfoId, @RequestParam int productId) {
-		// detail페이지로 이동할때 상품 id를 detail View(jsp)에 넘겨준다
 		ModelAndView detail = new ModelAndView("/detail");
 		
-		detail.addObject("displayInfoId", displayInfoId);  // displayInfoId
-		detail.addObject("productId", productId);  // productId
+		detail.addObject("displayInfoId", displayInfoId); 
+		detail.addObject("productId", productId);
 		return detail;
 	}
 	
@@ -38,8 +37,8 @@ public class PageController {
 		// review페이지로 이동할때 상품 id를 review View(jsp)에 넘겨준다
 		ModelAndView review = new ModelAndView("/review");
 		
-		review.addObject("displayInfoId", displayInfoId); // displayInfoId
-		review.addObject("productId", productId); // productId
+		review.addObject("displayInfoId", displayInfoId); 
+		review.addObject("productId", productId); 
 
 		return review;
 	}
@@ -63,32 +62,25 @@ public class PageController {
 	
 	// 로그인 -> 나의 예매 페이지 
 	@GetMapping(path = "/myreservation")
-	public ModelAndView myreservationPage(HttpServletResponse response, HttpServletRequest request, HttpSession session) throws IOException {
+	public ModelAndView myreservationPage(HttpServletRequest request, HttpSession session) {
 	
-		ModelAndView model = new ModelAndView();
+		ModelAndView model;
 		String reservationEmail = request.getParameter("reservationEmail");
-		int count = 0;
-		count = myReservationService.getTotalReservationCountByEmail(reservationEmail);			
-			
+		int count = myReservationService.getTotalReservationCountByEmail(reservationEmail);
+
 		// 아이디가 존재하지 않는 경우 로그인 페이지로 이동
-		if(count == 0) {
-			ModelAndView alert = new ModelAndView("/alert");
-
-			alert.addObject("message", "아이디가 존재하지 않습니다!!");
-			alert.addObject("url", "http://localhost:8080/reservation/bookingloginPage");
-			return alert;
-
-		}else {
-			// 아이디가 존재 할 경우 세션에 등록한다. 
-			if(session.getAttribute("email") == null) {
-				session.setAttribute("email", reservationEmail);
-			}
+		if (count == 0) {
+		    model = new ModelAndView("/alert");
+		    model.addObject("message", "아이디가 존재하지 않습니다!!");
+		    model.addObject("url", "http://localhost:8080/reservation/bookingloginPage");
+		} else {
+		    model = new ModelAndView("myreservation");
+		    if (session.getAttribute("email") == null) {
+		        session.setAttribute("email", reservationEmail);
+		    }
 		}
-		
-		// 아이디가 존재 할 경우 myreservation 페이지로 이동
-		model.setViewName("myreservation");
+
 		return model;
-		
 	}
 	
 	// 리뷰작성 페이지
@@ -106,7 +98,5 @@ public class PageController {
 			session.setAttribute("email", reservationEmail);
 		}
 		return reviewWrite;
-		
 	}
-	
 }

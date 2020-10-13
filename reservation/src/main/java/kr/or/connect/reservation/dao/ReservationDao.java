@@ -7,8 +7,6 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -16,16 +14,15 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import kr.or.connect.reservation.dto.MyReservation;
 import kr.or.connect.reservation.dto.ReservationForm;
 import kr.or.connect.reservation.dto.ReservationPrice;
 
-import static kr.or.connect.reservation.dao.ReservationDaoSqls.*;
+import static kr.or.connect.reservation.dao.ReservationDaoSql.*;
 
 @Repository
 public class ReservationDao {
 	
-	private NamedParameterJdbcTemplate jdbc;
+	private final NamedParameterJdbcTemplate jdbc;
 
 	public ReservationDao(DataSource dataSource) {
 		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
@@ -47,10 +44,8 @@ public class ReservationDao {
 				.addValue("modifyDate", now);
 		
 		jdbc.update(INSERT_RESERVATION, paramSource, holder);
-		int rsvnId = holder.getKey().intValue();
-
-		System.out.println(rsvnId);
-		return rsvnId;
+		int reservationId = holder.getKey().intValue();
+		return reservationId;
 	}
 
 	public void insertPrices(ReservationForm reservationForm, int reservationInfoId) {

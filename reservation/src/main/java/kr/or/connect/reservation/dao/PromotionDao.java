@@ -1,6 +1,5 @@
 package kr.or.connect.reservation.dao;
 
-import java.util.Collections;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -11,11 +10,11 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import kr.or.connect.reservation.dto.Promotion;
-import static kr.or.connect.reservation.dao.PromotionDaoSqls.*;
+import static kr.or.connect.reservation.dao.PromotionDaoSql.*;
 
 @Repository
 public class PromotionDao {
-	private NamedParameterJdbcTemplate jdbc;
+	private final NamedParameterJdbcTemplate jdbc;
 	private RowMapper<Promotion> promotionMapper = BeanPropertyRowMapper.newInstance(Promotion.class);
 	
 	public PromotionDao(DataSource dataSource) {
@@ -23,7 +22,7 @@ public class PromotionDao {
 	}
 
 	public List<Promotion> selectAll(){
-		return jdbc.query(SELECT_ALL, Collections.emptyMap(), promotionMapper);
+		return jdbc.query(SELECT_ALL, promotionMapper);
 	}
 
 }

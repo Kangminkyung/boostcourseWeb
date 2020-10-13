@@ -88,6 +88,9 @@ public class MyReservation {
 		this.ticketInfo = ticketInfo;
 	}
 	
+	public boolean isCanceled() {
+		return cancelFlag == 1;
+	}
 	@Override
 	public String toString() {
 		return "MyReservation [ticketPrice=" + ticketPrice + ", ticketCount=" + ticketCount + ", displayInfoId="

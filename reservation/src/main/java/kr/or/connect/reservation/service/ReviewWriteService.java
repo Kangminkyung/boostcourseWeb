@@ -16,11 +16,9 @@ public class ReviewWriteService {
 	@Autowired
 	private CommentDao commentDao;
 
-	@Transactional(readOnly = false)
-	public void addReviewData(ReviewWrite reviews, boolean isEmpty) {
+	public void addReviewData(ReviewWrite reviews, boolean fileNotExists) {
 
-		
-		if(isEmpty) {
+		if(fileNotExists) {
 			// 사진 없음 텍스트만 등록
 			reviewWriteDao.insertUserComment(reviews);
 		}else {

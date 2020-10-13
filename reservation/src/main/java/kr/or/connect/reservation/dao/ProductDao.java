@@ -16,12 +16,12 @@ import kr.or.connect.reservation.dto.Product;
 import kr.or.connect.reservation.dto.ProductImage;
 import kr.or.connect.reservation.dto.ProductPrice;
 
-import static kr.or.connect.reservation.dao.ProductDaoSqls.*;
+import static kr.or.connect.reservation.dao.ProductDaoSql.*;
 
 @Repository
 public class ProductDao {
 
-	private NamedParameterJdbcTemplate jdbc;
+	private final NamedParameterJdbcTemplate jdbc;
 	private RowMapper<Product> productMapper = BeanPropertyRowMapper.newInstance(Product.class);
 	private RowMapper<ProductImage> productImageMapper = BeanPropertyRowMapper.newInstance(ProductImage.class);
 	private RowMapper<ProductPrice> productPriceMapper = BeanPropertyRowMapper.newInstance(ProductPrice.class);

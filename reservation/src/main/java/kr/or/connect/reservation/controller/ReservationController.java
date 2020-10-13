@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -21,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import kr.or.connect.reservation.dto.MyReservation;
 import kr.or.connect.reservation.dto.ReservationForm;
@@ -38,65 +43,55 @@ public class ReservationController {
 	@Autowired
 	private MyReservationService myReservationService;
 	
-	private enum Status {
-		CANCEL, CONFIRMED, USED
-	}
-	
+
 	/* reservation*/
 	// 예매하기
 	@PostMapping(path = "/addReservation")
-	public ModelAndView reserve(ReservationForm  reservationForm, HttpServletResponse response) throws IOException {
+	public ModelAndView reserve(ReservationForm  reservationForm){
 		
 		int displayInfoId = reservationForm.getDisplayInfoId();
 		int productId = reservationForm.getProductId();
 		int reservationId = reservationService.addReservation(reservationForm);
 		
 		ModelAndView alert = new ModelAndView("/alert");
-		String url = "http://localhost:8080/reservation/reserve?displayInfoId=";
-		url += displayInfoId;
-		url += "&productId=";
-		url += productId;
 		
-		System.out.println(url);
+		UriComponents uri = UriComponentsBuilder.fromHttpUrl("http://localhost:8080")
+                .path("/reservation/reserve")
+                .queryParam("displayInfoId", displayInfoId)
+                .queryParam("productId", productId)
+                .build();
 		
-		alert.addObject("url", url);
-
-		if(reservationId > 0) {
-			alert.addObject("message", "예약 성공!!");
-		
-		}else {
-			alert.addObject("message", "예약 실패!!");
-		}
+		alert.addObject("uri", uri);
+		alert.addObject("message", reservationId > 0 ? "예약 성공!!" : "예약 실패!!");
 		return alert;
 	}
 	
-	/* myreservation*/
+	/* myreservation*/  
 	// 예약 상태 분류
-	private Status ClassifyList(MyReservation myReservation) throws ParseException {
+	private Status classifyResevationStatus(MyReservation myReservation) throws ParseException {
 		
-		if(myReservation.getCancelFlag() == 1) {
+		if(myReservation.isCanceled()) {
 			return Status.CANCEL;
 		}else {
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Date reservationDate = dateFormat.parse(myReservation.getReservationDate());
-			
-			Date currentDate = new Date();
-			Calendar startDate = Calendar.getInstance();
-			Calendar endDate = Calendar.getInstance();
-			startDate.setTime(currentDate);
-			endDate.setTime(reservationDate);
-			
-			long diffMillis = startDate.getTimeInMillis() - endDate.getTimeInMillis();
-			int diff = (int) (diffMillis / (24 * 60 * 60 * 1000));
+	        Date reservationDate = dateFormat.parse(myReservation.getReservationDate());
+	            
+	        Date currentDate = new Date();
+	        Calendar startDate = Calendar.getInstance();
+	        Calendar endDate = Calendar.getInstance();
+	        startDate.setTime(currentDate);
+	        endDate.setTime(reservationDate);
+	            
+	        long diffMillis = startDate.getTimeInMillis() - endDate.getTimeInMillis();
+	        int diff = (int) (diffMillis / (24 * 60 * 60 * 1000));
 
-			if (diff > 0) {
-				return Status.USED;
-			} else {
-				return Status.CONFIRMED;
-			}
+	        if (diff > 0) {
+	            return Status.USED;
+	        } else {
+	            return Status.CONFIRMED;
+	        }
 		}
 	}
-	
 	
 	@GetMapping(path = "/reservations")
 	public Map<String, Object> getMyListByEmail(@RequestParam(value = "reservationEmail", required = false) String reservationEmail, HttpServletResponse response) throws ParseException, IOException{
@@ -112,7 +107,7 @@ public class ReservationController {
 			List<TicketInfo> tickets = myReservationService.getTicketInfo(myList.getReservationId());
 			
 			myList.setTicketInfo(tickets);
-			Status status = this.ClassifyList(myList);
+			Status status = this.classifyResevationStatus(myList);
 			
 			switch(status) {
 			case CANCEL :
@@ -150,8 +145,12 @@ public class ReservationController {
 	}
 
 	@PutMapping(path = "/reservations")
-	public int cancelReservation(@RequestParam(name = "reservationId", required = false, defaultValue = "") int reservationId) {
+	public int cancelReservation(@RequestParam(name = "reservationId", required = false) int reservationId) {
 		return myReservationService.cancelReservation(reservationId);
+	}
+	
+	private enum Status {
+		CANCEL, CONFIRMED, USED
 	}
 	
 }
