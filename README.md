@@ -12,6 +12,7 @@ https://www.edwith.org/boostcourse-web
 
 ## 2. 네이버 예약 서비스
 <div>
+
 **<메인>**<br/><br/>
 <img width="500" alt="1" src="https://user-images.githubusercontent.com/11714701/95966475-210e0a80-0e46-11eb-8659-2ce151688a13.png"> <br/><br/>
   
