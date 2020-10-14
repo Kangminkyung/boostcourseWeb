@@ -1,1 +1,4 @@
 /.metadata/
+*.java
+webapp/
+resources/
