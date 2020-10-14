@@ -1,7 +1,7 @@
 # boostcourseWeb
 
-부스트코스 웹 프로그래밍
-수료완료
+부스트코스 웹 프로그래밍<br/>
+수료완료<br/>
 https://www.edwith.org/boostcourse-web
 
 ## 1. 자기소개 홈페이지
