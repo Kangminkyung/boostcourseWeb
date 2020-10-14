@@ -6,11 +6,8 @@ https://www.edwith.org/boostcourse-web
 ## 1. 자기소개 홈페이지
 |프로젝트명|자기소개 홈페이지|To Do 웹 어플리케이션|네이버 예약 서비스|
 |------|---|---|---|
-|Back-End|Servlet/ JSP jstl & el|테스트3|
-|Front-End|HTTP 와 웹동작원리browser 렌더링 원리
-HTML 구조화 설계
-CSS 스타일링 및 UI 레이아웃 구성
-HTML,CSS 디버깅|테스트3|
+|Back-End|- Servlet/ JSP -jstl<br/> & el|- Maven<br/> -SQL<br/> -JDBC<br/> -MySQL<br/> - Servlet & JSP</br> -jstl & el|
+|Front-End|- HTTP 와 웹동작원리 browser 렌더링 원리<br/> -HTML 구조화 설계<br/> -CSS 스타일링 및 UI 레이아웃 구성<br/> -HTML,CSS 디버깅|- 자바스크립트 문법 (ES 2015이상)<br/> -BOM(setTimeout등)<br/> -XHR통신<br/> -JavaScript 디버깅|
 ## 2. To Do 웹 어플리케이션
 
 ## 3. 네이버 예약 서비스
