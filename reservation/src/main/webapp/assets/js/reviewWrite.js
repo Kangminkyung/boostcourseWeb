@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", ()=> {
 	var reviewWrite = new Review();
-	reviewWrite.init();
+	reviewWrite.initReview();
 
 });
 
@@ -11,7 +11,7 @@ function Review(){
 	this.guideReview =document.querySelector(".guide_review");
 }
 
-Review.prototype.init = function(){
+Review.prototype.initReview = function(){
 	Review.prototype.initTitle(); // 타이틀 
 	Review.prototype.initRatingScore(); // 별점
 	Review.prototype.initTextarea();// 텍스트
@@ -108,6 +108,7 @@ Review.prototype.initRatingScore = function(){
 			}
 		}
 	});
+	
 };
 
 /* 리뷰 텍스트*/
@@ -123,7 +124,6 @@ Review.prototype.initTextarea = function(){
 
 	reviewTextarea.addEventListener("blur", function(e){
 		if(e.target.value == ""){
-			console.log(e.target.value);
 			reviewTextarea.classList.remove("focus");
 			reviewWriteInfo.classList.remove("blind");
 		}

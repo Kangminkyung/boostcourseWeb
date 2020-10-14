@@ -83,8 +83,7 @@
 							<input type="file" class="hidden_input" 
 												id="reviewImageFileOpenInput" 
 												name = "imageFile"
-												accept="image/jpg,image/png" 
-												multiple>
+												accept="image/jpg,image/png">
 							<div class="guide_review">
 								<span class="textCount">0</span>/<span class="textLimit">400</span>
 								<span>(최소<span class="textLower">5</span>자이상)</span>

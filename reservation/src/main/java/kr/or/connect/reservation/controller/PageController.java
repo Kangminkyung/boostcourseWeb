@@ -72,7 +72,7 @@ public class PageController {
 		if (count == 0) {
 		    model = new ModelAndView("/alert");
 		    model.addObject("message", "아이디가 존재하지 않습니다!!");
-		    model.addObject("url", "http://localhost:8080/reservation/bookingloginPage");
+		    model.addObject("uri", "http://localhost:8080/reservation/bookingloginPage");
 		} else {
 		    model = new ModelAndView("myreservation");
 		    if (session.getAttribute("email") == null) {

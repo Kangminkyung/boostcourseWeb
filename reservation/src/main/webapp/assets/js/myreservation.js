@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", ()=> {
 	var mypage = new Mypage();
-	mypage.init();
+	mypage.initMypage();
 
 });
 
@@ -13,7 +13,7 @@ function Mypage(){
 	console.log(reservationEmail);
 }
 
-Mypage.prototype.init = function(){
+Mypage.prototype.initMypage = function(){
 	Mypage.prototype.initSummary();
 	Mypage.prototype.initLists();
 };

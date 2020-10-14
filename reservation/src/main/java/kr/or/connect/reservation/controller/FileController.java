@@ -76,10 +76,7 @@ public class FileController {
 	public void download(HttpServletRequest request,HttpServletResponse response){
 
 		int id = Integer.parseInt(request.getParameter("fileId"));
-
-		if(id == 0) { // 파일 없으면 종료
-			return;
-		}
+		if(id == 0) {return;}
 		
 		// 리뷰 이미지 경로 불러오기 
 		String saveFileName = reviewWriteService.selectReviewImageFile(id);

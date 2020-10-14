@@ -59,7 +59,7 @@ Product.prototype.change = function (){
 			}	
 		
 			let categoryId = clicked.target.parentElement.getAttribute('data-category');
-			let tempId = clicked.target.parentElement; // <a class='anchor'><span>뮤지컬</span></a>
+			let tempId = clicked.target.parentElement;
 		
 			if(categoryId === null){
 				categoryId = tempId.parentElement.getAttribute('data-category');
